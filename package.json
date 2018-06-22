@@ -1,0 +1,30 @@
+{
+  "name": "slideyslides",
+  "version": "0.0.0",
+  "description": "Tool for audio-based slide presentations optimized for news.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lathropd/slideyslides.git"
+  },
+  "keywords": [
+    "slides",
+    "audio",
+    "news",
+    "presentations",
+    "storytelling"
+  ],
+  "author": "Daniel Lathrop <daniel.lathrop@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/lathropd/slideyslides/issues"
+  },
+  "homepage": "https://github.com/lathropd/slideyslides#readme"
+}
