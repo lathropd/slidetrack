@@ -28,6 +28,8 @@
   },
   "homepage": "https://github.com/lathropd/slideyslides#readme",
   "devDependencies": {
+    "bourbon": "^5.0.1",
+    "bourbon-bitters": "^1.2.1",
     "chai": "^4.1.2",
     "mocha": "^5.2.0"
   }
