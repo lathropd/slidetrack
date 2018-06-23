@@ -232,38 +232,6 @@ body {
 
 
 
-/*********************************************
- * PROGRESS BAR
- *********************************************/
-
-.slidey .progress {
-	position: absolute;
-	display: none;
-	height: 3px;
-	width: 100%;
-	bottom: 0;
-	left: 0;
-	z-index: 10;
-
-	background-color: rgba( 0, 0, 0, 0.2 );
-	color: #fff;
-}
-	.slidey .progress:after {
-		content: '';
-		display: block;
-		position: absolute;
-		height: 10px;
-		width: 100%;
-		top: -10px;
-	}
-	.slidey .progress span {
-		display: block;
-		height: 100%;
-		width: 0px;
-
-		background-color: currentColor;
-		transition: width 800ms cubic-bezier(0.260, 0.860, 0.440, 0.985);
-	}
 
 /*********************************************
  * SLIDE NUMBER
