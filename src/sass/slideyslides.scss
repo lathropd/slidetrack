@@ -1,0 +1,31 @@
+@import "../../lib/sass/bourbon/bourbon";
+@import "../../lib/sass/base/base";
+
+
+$background_color: #fefefe;
+
+.slides {
+    background-color: $background_color;
+    height: 1080;
+    width: 800;
+}
+
+.slides div {
+
+    width: 400px;
+    height: 300px;
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    transform: translate(-50%, -50%) scale(1.00526);
+
+}
+
+.slides section {
+    display: none;
+}
+
+.slides section:nth-child(1) {
+    display: block;
+}
