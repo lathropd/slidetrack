@@ -1,7 +1,26 @@
-// @import "../../lib/sass/bourbon/bourbon";
-// @import "../../lib/sass/base/base";
+@import "../../lib/sass/bourbon/bourbon";
+@import "slidey";
 
 
-$background_color: #fefefe;
+// Create some good styling
 
-@import "slidey"
+
+
+
+    $background_color: #ffffcc;
+
+.slidey {
+    .slides {
+        // use flexbox for vertical centering
+        display: flex;
+        align-items: center;
+
+        // import bourbon bitters inside .slidey .slides
+        // find some alternative for this.
+        @import "../../lib/sass/base/base";
+    }
+
+
+
+
+}
