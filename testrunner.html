@@ -3,6 +3,8 @@
   <head>
     <title>Mocha Tests</title>
     <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+    <!-- this page  based on
+      https://www.sitepoint.com/unit-test-javascript-mocha-chai/ -->
   </head>
   <body>
     <div id="mocha"></div>
@@ -13,7 +15,9 @@
     <!-- load code you want to test here -->
 
     <!-- load your test files here -->
+    <script src="test/genericTest.js"></script>
 
+    <!-- run mocha -->
     <script>
       mocha.run();
     </script>
