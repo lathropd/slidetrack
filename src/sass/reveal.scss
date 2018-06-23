@@ -1,0 +1,1566 @@
+/*!
+ * modified version of thr SCSS from, reveal.js
+ * the .reveal is chaged to .slidey and deprecated bits are removed
+ * http://revealjs.com
+ * MIT licensed
+ *
+ * Copyright (C) 2017 Hakim El Hattab, http://hakim.se
+ */
+
+
+/*********************************************
+ * RESET STYLES
+ *********************************************/
+
+html, body, .slidey div, .slidey span, .slidey applet, .slidey object, .slidey iframe,
+.slidey h1, .slidey h2, .slidey h3, .slidey h4, .slidey h5, .slidey h6, .slidey p, .slidey blockquote, .slidey pre,
+.slidey a, .slidey abbr, .slidey acronym, .slidey address, .slidey big, .slidey cite, .slidey code,
+.slidey del, .slidey dfn, .slidey em, .slidey img, .slidey ins, .slidey kbd, .slidey q, .slidey s, .slidey samp,
+.slidey small, .slidey strike, .slidey strong, .slidey sub, .slidey sup, .slidey tt, .slidey var,
+.slidey b, .slidey u, .slidey center,
+.slidey dl, .slidey dt, .slidey dd, .slidey ol, .slidey ul, .slidey li,
+.slidey fieldset, .slidey form, .slidey label, .slidey legend,
+.slidey table, .slidey caption, .slidey tbody, .slidey tfoot, .slidey thead, .slidey tr, .slidey th, .slidey td,
+.slidey article, .slidey aside, .slidey canvas, .slidey details, .slidey embed,
+.slidey figure, .slidey figcaption, .slidey footer, .slidey header, .slidey hgroup,
+.slidey menu, .slidey nav, .slidey output, .slidey ruby, .slidey section, .slidey summary,
+.slidey time, .slidey mark, .slidey audio, .slidey video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+.slidey article, .slidey aside, .slidey details, .slidey figcaption, .slidey figure,
+.slidey footer, .slidey header, .slidey hgroup, .slidey menu, .slidey nav, .slidey section {
+	display: block;
+}
+
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	position: relative;
+	line-height: 1;
+
+	background-color: #fff;
+	color: #000;
+}
+
+
+/*********************************************
+ * VIEW FRAGMENTS
+ *********************************************/
+
+.slidey .slides section .fragment {
+	opacity: 0;
+	visibility: hidden;
+	transition: all .2s ease;
+
+	&.visible {
+		opacity: 1;
+		visibility: inherit;
+	}
+}
+
+.slidey .slides section .fragment.grow {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		transform: scale( 1.3 );
+	}
+}
+
+.slidey .slides section .fragment.shrink {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		transform: scale( 0.7 );
+	}
+}
+
+.slidey .slides section .fragment.zoom-in {
+	transform: scale( 0.1 );
+
+	&.visible {
+		transform: none;
+	}
+}
+
+.slidey .slides section .fragment.fade-out {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
+.slidey .slides section .fragment.semi-fade-out {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		opacity: 0.5;
+		visibility: inherit;
+	}
+}
+
+.slidey .slides section .fragment.strike {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		text-decoration: line-through;
+	}
+}
+
+.slidey .slides section .fragment.fade-up {
+	transform: translate(0, 20%);
+
+	&.visible {
+		transform: translate(0, 0);
+	}
+}
+
+.slidey .slides section .fragment.fade-down {
+	transform: translate(0, -20%);
+
+	&.visible {
+		transform: translate(0, 0);
+	}
+}
+
+.slidey .slides section .fragment.fade-right {
+	transform: translate(-20%, 0);
+
+	&.visible {
+		transform: translate(0, 0);
+	}
+}
+
+.slidey .slides section .fragment.fade-left {
+	transform: translate(20%, 0);
+
+	&.visible {
+		transform: translate(0, 0);
+	}
+}
+
+.slidey .slides section .fragment.current-visible {
+	opacity: 0;
+	visibility: hidden;
+
+	&.current-fragment {
+		opacity: 1;
+		visibility: inherit;
+	}
+}
+
+.slidey .slides section .fragment.highlight-red,
+.slidey .slides section .fragment.highlight-current-red,
+.slidey .slides section .fragment.highlight-green,
+.slidey .slides section .fragment.highlight-current-green,
+.slidey .slides section .fragment.highlight-blue,
+.slidey .slides section .fragment.highlight-current-blue {
+	opacity: 1;
+	visibility: inherit;
+}
+	.slidey .slides section .fragment.highlight-red.visible {
+		color: #ff2c2d
+	}
+	.slidey .slides section .fragment.highlight-green.visible {
+		color: #17ff2e;
+	}
+	.slidey .slides section .fragment.highlight-blue.visible {
+		color: #1b91ff;
+	}
+
+.slidey .slides section .fragment.highlight-current-red.current-fragment {
+	color: #ff2c2d
+}
+.slidey .slides section .fragment.highlight-current-green.current-fragment {
+	color: #17ff2e;
+}
+.slidey .slides section .fragment.highlight-current-blue.current-fragment {
+	color: #1b91ff;
+}
+
+
+/*********************************************
+ * DEFAULT ELEMENT STYLES
+ *********************************************/
+
+/* Fixes issue in Chrome where italic fonts did not appear when printing to PDF */
+.slidey:after {
+  content: '';
+  font-style: italic;
+}
+
+.slidey iframe {
+	z-index: 1;
+}
+
+/** Prevents layering issues in certain browser/transition combinations */
+.slidey a {
+	position: relative;
+}
+
+.slidey .stretch {
+	max-width: none;
+	max-height: none;
+}
+
+.slidey pre.stretch code {
+	height: 100%;
+	max-height: 100%;
+	box-sizing: border-box;
+}
+
+
+/*********************************************
+ * CONTROLS
+ *********************************************/
+
+@keyframes bounce-right {
+	0%, 10%, 25%, 40%, 50% {transform: translateX(0);}
+	20% {transform: translateX(10px);}
+	30% {transform: translateX(-5px);}
+}
+
+@keyframes bounce-down {
+	0%, 10%, 25%, 40%, 50% {transform: translateY(0);}
+	20% {transform: translateY(10px);}
+	30% {transform: translateY(-5px);}
+}
+
+$controlArrowSize: 3.6em;
+$controlArrowSpacing: 1.4em;
+$controlArrowLength: 2.6em;
+$controlArrowThickness: 0.5em;
+$controlsArrowAngle: 45deg;
+$controlsArrowAngleHover: 40deg;
+$controlsArrowAngleActive: 36deg;
+
+@mixin controlsArrowTransform( $angle ) {
+	&:before {
+		transform: translateX(($controlArrowSize - $controlArrowLength)/2) translateY(($controlArrowSize - $controlArrowThickness)/2) rotate( $angle );
+	}
+
+	&:after {
+		transform: translateX(($controlArrowSize - $controlArrowLength)/2) translateY(($controlArrowSize - $controlArrowThickness)/2) rotate( -$angle );
+	}
+}
+
+.slidey .controls {
+	$spacing: 12px;
+
+	display: none;
+	position: absolute;
+	top: auto;
+	bottom: $spacing;
+	right: $spacing;
+	left: auto;
+	z-index: 1;
+	color: #000;
+	pointer-events: none;
+	font-size: 10px;
+
+	button {
+		position: absolute;
+		padding: 0;
+		background-color: transparent;
+		border: 0;
+		outline: 0;
+		cursor: pointer;
+		color: currentColor;
+		transform: scale(.9999);
+		transition: color 0.2s ease,
+					opacity 0.2s ease,
+					transform 0.2s ease;
+		z-index: 2; // above slides
+		pointer-events: auto;
+		font-size: inherit;
+
+		visibility: hidden;
+		opacity: 0;
+
+		-webkit-appearance: none;
+		-webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
+	}
+
+	.controls-arrow:before,
+	.controls-arrow:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: $controlArrowLength;
+		height: $controlArrowThickness;
+		border-radius: $controlArrowThickness/2;
+		background-color: currentColor;
+
+		transition: all 0.15s ease, background-color 0.8s ease;
+		transform-origin: floor(($controlArrowThickness/2)*10)/10 50%;
+		will-change: transform;
+	}
+
+	.controls-arrow {
+		position: relative;
+		width: $controlArrowSize;
+		height: $controlArrowSize;
+
+		@include controlsArrowTransform( $controlsArrowAngle );
+
+		&:hover {
+			@include controlsArrowTransform( $controlsArrowAngleHover );
+		}
+
+		&:active {
+			@include controlsArrowTransform( $controlsArrowAngleActive );
+		}
+	}
+
+	.navigate-left {
+		right: $controlArrowSize + $controlArrowSpacing*2;
+		bottom: $controlArrowSpacing + $controlArrowSize/2;
+		transform: translateX( -10px );
+	}
+
+	.navigate-right {
+		right: 0;
+		bottom: $controlArrowSpacing + $controlArrowSize/2;
+		transform: translateX( 10px );
+
+		.controls-arrow {
+			transform: rotate( 180deg );
+		}
+
+		&.highlight {
+			animation: bounce-right 2s 50 both ease-out;
+		}
+	}
+
+	.navigate-up {
+		right: $controlArrowSpacing + $controlArrowSize/2;
+		bottom: $controlArrowSpacing*2 + $controlArrowSize;
+		transform: translateY( -10px );
+
+		.controls-arrow {
+			transform: rotate( 90deg );
+		}
+	}
+
+	.navigate-down {
+		right: $controlArrowSpacing + $controlArrowSize/2;
+		bottom: 0;
+		transform: translateY( 10px );
+
+		.controls-arrow {
+			transform: rotate( -90deg );
+		}
+
+		&.highlight {
+			animation: bounce-down 2s 50 both ease-out;
+		}
+	}
+
+	// Back arrow style: "faded":
+	// Deemphasize backwards navigation arrows in favor of drawing
+	// attention to forwards navigation
+	&[data-controls-back-arrows="faded"] .navigate-left.enabled,
+	&[data-controls-back-arrows="faded"] .navigate-up.enabled {
+		opacity: 0.3;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	// Back arrow style: "hidden":
+	// Never show arrows for backwards navigation
+	&[data-controls-back-arrows="hidden"] .navigate-left.enabled,
+	&[data-controls-back-arrows="hidden"] .navigate-up.enabled {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	// Any control button that can be clicked is "enabled"
+	.enabled {
+		visibility: visible;
+		opacity: 0.9;
+		cursor: pointer;
+		transform: none;
+	}
+
+	// Any control button that leads to showing or hiding
+	// a fragment
+	.enabled.fragmented {
+		opacity: 0.5;
+	}
+
+	.enabled:hover,
+	.enabled.fragmented:hover {
+		opacity: 1;
+	}
+}
+
+// Adjust the layout when there are no vertical slides
+.slidey:not(.has-vertical-slides) .controls .navigate-left {
+	bottom: $controlArrowSpacing;
+	right: 0.5em + $controlArrowSpacing + $controlArrowSize;
+}
+
+.slidey:not(.has-vertical-slides) .controls .navigate-right {
+	bottom: $controlArrowSpacing;
+	right: 0.5em;
+}
+
+// Adjust the layout when there are no horizontal slides
+.slidey:not(.has-horizontal-slides) .controls .navigate-up {
+	right: $controlArrowSpacing;
+	bottom: $controlArrowSpacing + $controlArrowSize;
+}
+.slidey:not(.has-horizontal-slides) .controls .navigate-down {
+	right: $controlArrowSpacing;
+	bottom: 0.5em;
+}
+
+// Invert arrows based on background color
+.slidey.has-dark-background .controls {
+	color: #fff;
+}
+.slidey.has-light-background .controls {
+	color: #000;
+}
+
+// Disable active states on touch devices
+.slidey.no-hover .controls .controls-arrow:hover,
+.slidey.no-hover .controls .controls-arrow:active {
+	@include controlsArrowTransform( $controlsArrowAngle );
+}
+
+// Edge aligned controls layout
+@media screen and (min-width: 500px) {
+
+	$spacing: 8px;
+
+	.slidey .controls[data-controls-layout="edges"] {
+		& {
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+
+		.navigate-left,
+		.navigate-right,
+		.navigate-up,
+		.navigate-down {
+			bottom: auto;
+			right: auto;
+		}
+
+		.navigate-left {
+			top: 50%;
+			left: $spacing;
+			margin-top: -$controlArrowSize/2;
+		}
+
+		.navigate-right {
+			top: 50%;
+			right: $spacing;
+			margin-top: -$controlArrowSize/2;
+		}
+
+		.navigate-up {
+			top: $spacing;
+			left: 50%;
+			margin-left: -$controlArrowSize/2;
+		}
+
+		.navigate-down {
+			bottom: $spacing;
+			left: 50%;
+			margin-left: -$controlArrowSize/2;
+		}
+	}
+
+}
+
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+
+.slidey .progress {
+	position: absolute;
+	display: none;
+	height: 3px;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+
+	background-color: rgba( 0, 0, 0, 0.2 );
+	color: #fff;
+}
+	.slidey .progress:after {
+		content: '';
+		display: block;
+		position: absolute;
+		height: 10px;
+		width: 100%;
+		top: -10px;
+	}
+	.slidey .progress span {
+		display: block;
+		height: 100%;
+		width: 0px;
+
+		background-color: currentColor;
+		transition: width 800ms cubic-bezier(0.260, 0.860, 0.440, 0.985);
+	}
+
+/*********************************************
+ * SLIDE NUMBER
+ *********************************************/
+
+.slidey .slide-number {
+	position: fixed;
+	display: block;
+	right: 8px;
+	bottom: 8px;
+	z-index: 31;
+	font-family: Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 1;
+	color: #fff;
+	background-color: rgba( 0, 0, 0, 0.4 );
+	padding: 5px;
+}
+
+.slidey .slide-number-delimiter {
+	margin: 0 3px;
+}
+
+/*********************************************
+ * SLIDES
+ *********************************************/
+
+.slidey {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	touch-action: none;
+}
+
+// Mobile Safari sometimes overlays a header at the top
+// of the page when in landscape mode. Using fixed
+// positioning ensures that reveal.js reduces its height
+// when this header is visible.
+@media only screen and (orientation : landscape) {
+	.slidey.ua-iphone {
+		position: fixed;
+	}
+}
+
+.slidey .slides {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	pointer-events: none;
+
+	overflow: visible;
+	z-index: 1;
+	text-align: center;
+	perspective: 600px;
+	perspective-origin: 50% 40%;
+}
+
+.slidey .slides>section {
+	-ms-perspective: 600px;
+}
+
+.slidey .slides>section,
+.slidey .slides>section>section {
+	display: none;
+	position: absolute;
+	width: 100%;
+	padding: 20px 0px;
+	pointer-events: auto;
+
+	z-index: 10;
+	transform-style: flat;
+	transition: transform-origin 800ms cubic-bezier(0.260, 0.860, 0.440, 0.985),
+				transform 800ms cubic-bezier(0.260, 0.860, 0.440, 0.985),
+				visibility 800ms cubic-bezier(0.260, 0.860, 0.440, 0.985),
+				opacity 800ms cubic-bezier(0.260, 0.860, 0.440, 0.985);
+}
+
+/* Global transition speed settings */
+.slidey[data-transition-speed="fast"] .slides section {
+	transition-duration: 400ms;
+}
+.slidey[data-transition-speed="slow"] .slides section {
+	transition-duration: 1200ms;
+}
+
+/* Slide-specific transition speed overrides */
+.slidey .slides section[data-transition-speed="fast"] {
+	transition-duration: 400ms;
+}
+.slidey .slides section[data-transition-speed="slow"] {
+	transition-duration: 1200ms;
+}
+
+.slidey .slides>section.stack {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.slidey .slides>section.present,
+.slidey .slides>section>section.present {
+	display: block;
+	z-index: 11;
+	opacity: 1;
+}
+
+.slidey .slides>section:empty,
+.slidey .slides>section>section:empty,
+.slidey .slides>section[data-background-interactive],
+.slidey .slides>section>section[data-background-interactive] {
+	pointer-events: none;
+}
+
+.slidey.center,
+.slidey.center .slides,
+.slidey.center .slides section {
+	min-height: 0 !important;
+}
+
+/* Don't allow interaction with invisible slides */
+.slidey .slides>section.future,
+.slidey .slides>section>section.future,
+.slidey .slides>section.past,
+.slidey .slides>section>section.past {
+	pointer-events: none;
+}
+
+.slidey.overview .slides>section,
+.slidey.overview .slides>section>section {
+	pointer-events: auto;
+}
+
+.slidey .slides>section.past,
+.slidey .slides>section.future,
+.slidey .slides>section>section.past,
+.slidey .slides>section>section.future {
+	opacity: 0;
+}
+
+
+/*********************************************
+ * Mixins for readability of transitions
+ *********************************************/
+
+@mixin transition-global($style) {
+	.slidey .slides section[data-transition=#{$style}],
+	.slidey.#{$style} .slides section:not([data-transition]) {
+		@content;
+	}
+}
+@mixin transition-stack($style) {
+	.slidey .slides section[data-transition=#{$style}].stack,
+	.slidey.#{$style} .slides section.stack {
+		@content;
+	}
+}
+@mixin transition-horizontal-past($style) {
+	.slidey .slides>section[data-transition=#{$style}].past,
+	.slidey .slides>section[data-transition~=#{$style}-out].past,
+	.slidey.#{$style} .slides>section:not([data-transition]).past {
+		@content;
+	}
+}
+@mixin transition-horizontal-future($style) {
+	.slidey .slides>section[data-transition=#{$style}].future,
+	.slidey .slides>section[data-transition~=#{$style}-in].future,
+	.slidey.#{$style} .slides>section:not([data-transition]).future {
+		@content;
+	}
+}
+
+@mixin transition-vertical-past($style) {
+	.slidey .slides>section>section[data-transition=#{$style}].past,
+	.slidey .slides>section>section[data-transition~=#{$style}-out].past,
+	.slidey.#{$style} .slides>section>section:not([data-transition]).past {
+		@content;
+	}
+}
+@mixin transition-vertical-future($style) {
+	.slidey .slides>section>section[data-transition=#{$style}].future,
+	.slidey .slides>section>section[data-transition~=#{$style}-in].future,
+	.slidey.#{$style} .slides>section>section:not([data-transition]).future {
+		@content;
+	}
+}
+
+/*********************************************
+ * SLIDE TRANSITION
+ * Aliased 'linear' for backwards compatibility
+ *********************************************/
+
+@each $stylename in slide, linear {
+	.slidey.#{$stylename} section {
+		backface-visibility: hidden;
+	}
+	@include transition-horizontal-past(#{$stylename}) {
+		transform: translate(-150%, 0);
+	}
+	@include transition-horizontal-future(#{$stylename}) {
+		transform: translate(150%, 0);
+	}
+	@include transition-vertical-past(#{$stylename}) {
+		transform: translate(0, -150%);
+	}
+	@include transition-vertical-future(#{$stylename}) {
+		transform: translate(0, 150%);
+	}
+}
+
+/*********************************************
+ * CONVEX TRANSITION
+ * Aliased 'default' for backwards compatibility
+ *********************************************/
+
+@each $stylename in default, convex {
+	@include transition-stack(#{$stylename}) {
+		transform-style: preserve-3d;
+	}
+
+	@include transition-horizontal-past(#{$stylename}) {
+		transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+	}
+	@include transition-horizontal-future(#{$stylename}) {
+		transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+	}
+	@include transition-vertical-past(#{$stylename}) {
+		transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0);
+	}
+	@include transition-vertical-future(#{$stylename}) {
+		transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0);
+	}
+}
+
+/*********************************************
+ * CONCAVE TRANSITION
+ *********************************************/
+
+@include transition-stack(concave) {
+	transform-style: preserve-3d;
+}
+
+@include transition-horizontal-past(concave) {
+	transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+}
+@include transition-horizontal-future(concave) {
+	transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+}
+@include transition-vertical-past(concave) {
+	transform: translate3d(0, -80%, 0) rotateX(-70deg) translate3d(0, -80%, 0);
+}
+@include transition-vertical-future(concave) {
+	transform: translate3d(0, 80%, 0) rotateX(70deg) translate3d(0, 80%, 0);
+}
+
+
+/*********************************************
+ * ZOOM TRANSITION
+ *********************************************/
+
+@include transition-global(zoom) {
+	transition-timing-function: ease;
+}
+@include transition-horizontal-past(zoom) {
+	visibility: hidden;
+	transform: scale(16);
+}
+@include transition-horizontal-future(zoom) {
+	visibility: hidden;
+	transform: scale(0.2);
+}
+@include transition-vertical-past(zoom) {
+	transform: translate(0, -150%);
+}
+@include transition-vertical-future(zoom) {
+	transform: translate(0, 150%);
+}
+
+
+/*********************************************
+ * FADE TRANSITION
+ *********************************************/
+
+.slidey .slides section[data-transition=fade],
+.slidey.fade .slides section:not([data-transition]),
+.slidey.fade .slides>section>section:not([data-transition]) {
+	transform: none;
+	transition: opacity 0.5s;
+}
+
+
+.slidey.fade.overview .slides section,
+.slidey.fade.overview .slides>section>section {
+	transition: none;
+}
+
+
+/*********************************************
+ * NO TRANSITION
+ *********************************************/
+
+@include transition-global(none) {
+	transform: none;
+	transition: none;
+}
+
+
+/*********************************************
+ * PAUSED MODE
+ *********************************************/
+
+.slidey .pause-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: black;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 100;
+	transition: all 1s ease;
+}
+.slidey.paused .pause-overlay {
+	visibility: visible;
+	opacity: 1;
+}
+
+
+/*********************************************
+ * FALLBACK
+ *********************************************/
+
+.no-transforms {
+	overflow-y: auto;
+}
+
+.no-transforms .slidey .slides {
+	position: relative;
+	width: 80%;
+	height: auto !important;
+	top: 0;
+	left: 50%;
+	margin: 0;
+	text-align: center;
+}
+
+.no-transforms .slidey .controls,
+.no-transforms .slidey .progress {
+	display: none !important;
+}
+
+.no-transforms .slidey .slides section {
+	display: block !important;
+	opacity: 1 !important;
+	position: relative !important;
+	height: auto;
+	min-height: 0;
+	top: 0;
+	left: -50%;
+	margin: 70px 0;
+	transform: none;
+}
+
+.no-transforms .slidey .slides section section {
+	left: 0;
+}
+
+.slidey .no-transition,
+.slidey .no-transition * {
+	transition: none !important;
+}
+
+
+/*********************************************
+ * PER-SLIDE BACKGROUNDS
+ *********************************************/
+
+.slidey .backgrounds {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	perspective: 600px;
+}
+	.slidey .slide-background {
+		display: none;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		visibility: hidden;
+		overflow: hidden;
+
+		background-color: rgba( 0, 0, 0, 0 );
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		transition: all 800ms cubic-bezier(0.260, 0.860, 0.440, 0.985);
+	}
+
+	.slidey .slide-background.stack {
+		display: block;
+	}
+
+	.slidey .slide-background.present {
+		opacity: 1;
+		visibility: visible;
+		z-index: 2;
+	}
+
+	.print-pdf .slidey .slide-background {
+		opacity: 1 !important;
+		visibility: visible !important;
+	}
+
+/* Video backgrounds */
+.slidey .slide-background video {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	max-height: none;
+	top: 0;
+	left: 0;
+	object-fit: cover;
+}
+	.slidey .slide-background[data-background-size="contain"] video {
+		object-fit: contain;
+	}
+
+/* Immediate transition style */
+.slidey[data-background-transition=none]>.backgrounds .slide-background,
+.slidey>.backgrounds .slide-background[data-background-transition=none] {
+	transition: none;
+}
+
+/* Slide */
+.slidey[data-background-transition=slide]>.backgrounds .slide-background,
+.slidey>.backgrounds .slide-background[data-background-transition=slide] {
+	opacity: 1;
+	backface-visibility: hidden;
+}
+	.slidey[data-background-transition=slide]>.backgrounds .slide-background.past,
+	.slidey>.backgrounds .slide-background.past[data-background-transition=slide] {
+		transform: translate(-100%, 0);
+	}
+	.slidey[data-background-transition=slide]>.backgrounds .slide-background.future,
+	.slidey>.backgrounds .slide-background.future[data-background-transition=slide] {
+		transform: translate(100%, 0);
+	}
+
+	.slidey[data-background-transition=slide]>.backgrounds .slide-background>.slide-background.past,
+	.slidey>.backgrounds .slide-background>.slide-background.past[data-background-transition=slide] {
+		transform: translate(0, -100%);
+	}
+	.slidey[data-background-transition=slide]>.backgrounds .slide-background>.slide-background.future,
+	.slidey>.backgrounds .slide-background>.slide-background.future[data-background-transition=slide] {
+		transform: translate(0, 100%);
+	}
+
+
+/* Convex */
+.slidey[data-background-transition=convex]>.backgrounds .slide-background.past,
+.slidey>.backgrounds .slide-background.past[data-background-transition=convex] {
+	opacity: 0;
+	transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+}
+.slidey[data-background-transition=convex]>.backgrounds .slide-background.future,
+.slidey>.backgrounds .slide-background.future[data-background-transition=convex] {
+	opacity: 0;
+	transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+}
+
+.slidey[data-background-transition=convex]>.backgrounds .slide-background>.slide-background.past,
+.slidey>.backgrounds .slide-background>.slide-background.past[data-background-transition=convex] {
+	opacity: 0;
+	transform: translate3d(0, -100%, 0) rotateX(90deg) translate3d(0, -100%, 0);
+}
+.slidey[data-background-transition=convex]>.backgrounds .slide-background>.slide-background.future,
+.slidey>.backgrounds .slide-background>.slide-background.future[data-background-transition=convex] {
+	opacity: 0;
+	transform: translate3d(0, 100%, 0) rotateX(-90deg) translate3d(0, 100%, 0);
+}
+
+
+/* Concave */
+.slidey[data-background-transition=concave]>.backgrounds .slide-background.past,
+.slidey>.backgrounds .slide-background.past[data-background-transition=concave] {
+	opacity: 0;
+	transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+}
+.slidey[data-background-transition=concave]>.backgrounds .slide-background.future,
+.slidey>.backgrounds .slide-background.future[data-background-transition=concave] {
+	opacity: 0;
+	transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+}
+
+.slidey[data-background-transition=concave]>.backgrounds .slide-background>.slide-background.past,
+.slidey>.backgrounds .slide-background>.slide-background.past[data-background-transition=concave] {
+	opacity: 0;
+	transform: translate3d(0, -100%, 0) rotateX(-90deg) translate3d(0, -100%, 0);
+}
+.slidey[data-background-transition=concave]>.backgrounds .slide-background>.slide-background.future,
+.slidey>.backgrounds .slide-background>.slide-background.future[data-background-transition=concave] {
+	opacity: 0;
+	transform: translate3d(0, 100%, 0) rotateX(90deg) translate3d(0, 100%, 0);
+}
+
+/* Zoom */
+.slidey[data-background-transition=zoom]>.backgrounds .slide-background,
+.slidey>.backgrounds .slide-background[data-background-transition=zoom] {
+	transition-timing-function: ease;
+}
+
+.slidey[data-background-transition=zoom]>.backgrounds .slide-background.past,
+.slidey>.backgrounds .slide-background.past[data-background-transition=zoom] {
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(16);
+}
+.slidey[data-background-transition=zoom]>.backgrounds .slide-background.future,
+.slidey>.backgrounds .slide-background.future[data-background-transition=zoom] {
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(0.2);
+}
+
+.slidey[data-background-transition=zoom]>.backgrounds .slide-background>.slide-background.past,
+.slidey>.backgrounds .slide-background>.slide-background.past[data-background-transition=zoom] {
+	opacity: 0;
+		visibility: hidden;
+		transform: scale(16);
+}
+.slidey[data-background-transition=zoom]>.backgrounds .slide-background>.slide-background.future,
+.slidey>.backgrounds .slide-background>.slide-background.future[data-background-transition=zoom] {
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(0.2);
+}
+
+
+/* Global transition speed settings */
+.slidey[data-transition-speed="fast"]>.backgrounds .slide-background {
+	transition-duration: 400ms;
+}
+.slidey[data-transition-speed="slow"]>.backgrounds .slide-background {
+	transition-duration: 1200ms;
+}
+
+
+/*********************************************
+ * OVERVIEW
+ *********************************************/
+
+.slidey.overview {
+	perspective-origin: 50% 50%;
+	perspective: 700px;
+
+	.slides {
+		// Fixes overview rendering errors in FF48+, not applied to
+		// other browsers since it degrades performance
+		-moz-transform-style: preserve-3d;
+	}
+
+	.slides section {
+		height: 100%;
+		top: 0 !important;
+		opacity: 1 !important;
+		overflow: hidden;
+		visibility: visible !important;
+		cursor: pointer;
+		box-sizing: border-box;
+	}
+	.slides section:hover,
+	.slides section.present {
+		outline: 10px solid rgba(150,150,150,0.4);
+		outline-offset: 10px;
+	}
+	.slides section .fragment {
+		opacity: 1;
+		transition: none;
+	}
+	.slides section:after,
+	.slides section:before {
+		display: none !important;
+	}
+	.slides>section.stack {
+		padding: 0;
+		top: 0 !important;
+		background: none;
+		outline: none;
+		overflow: visible;
+	}
+
+	.backgrounds {
+		perspective: inherit;
+
+		// Fixes overview rendering errors in FF48+, not applied to
+		// other browsers since it degrades performance
+		-moz-transform-style: preserve-3d;
+	}
+
+	.backgrounds .slide-background {
+		opacity: 1;
+		visibility: visible;
+
+		// This can't be applied to the slide itself in Safari
+		outline: 10px solid rgba(150,150,150,0.1);
+		outline-offset: 10px;
+	}
+
+	.backgrounds .slide-background.stack {
+		overflow: visible;
+	}
+}
+
+// Disable transitions transitions while we're activating
+// or deactivating the overview mode.
+.slidey.overview .slides section,
+.slidey.overview-deactivating .slides section {
+	transition: none;
+}
+
+.slidey.overview .backgrounds .slide-background,
+.slidey.overview-deactivating .backgrounds .slide-background {
+	transition: none;
+}
+
+
+/*********************************************
+ * RTL SUPPORT
+ *********************************************/
+
+.slidey.rtl .slides,
+.slidey.rtl .slides h1,
+.slidey.rtl .slides h2,
+.slidey.rtl .slides h3,
+.slidey.rtl .slides h4,
+.slidey.rtl .slides h5,
+.slidey.rtl .slides h6 {
+	direction: rtl;
+	font-family: sans-serif;
+}
+
+.slidey.rtl pre,
+.slidey.rtl code {
+	direction: ltr;
+}
+
+.slidey.rtl ol,
+.slidey.rtl ul {
+	text-align: right;
+}
+
+.slidey.rtl .progress span {
+	float: right
+}
+
+/*********************************************
+ * PARALLAX BACKGROUND
+ *********************************************/
+
+.slidey.has-parallax-background .backgrounds {
+	transition: all 0.8s ease;
+}
+
+/* Global transition speed settings */
+.slidey.has-parallax-background[data-transition-speed="fast"] .backgrounds {
+	transition-duration: 400ms;
+}
+.slidey.has-parallax-background[data-transition-speed="slow"] .backgrounds {
+	transition-duration: 1200ms;
+}
+
+
+/*********************************************
+ * LINK PREVIEW OVERLAY
+ *********************************************/
+
+.slidey .overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	background: rgba( 0, 0, 0, 0.9 );
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+}
+	.slidey .overlay.visible {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.slidey .overlay .spinner {
+		position: absolute;
+		display: block;
+		top: 50%;
+		left: 50%;
+		width: 32px;
+		height: 32px;
+		margin: -16px 0 0 -16px;
+		z-index: 10;
+		background-image: url(data:image/gif;base64,R0lGODlhIAAgAPMAAJmZmf%2F%2F%2F6%2Bvr8nJybW1tcDAwOjo6Nvb26ioqKOjo7Ozs%2FLy8vz8%2FAAAAAAAAAAAACH%2FC05FVFNDQVBFMi4wAwEAAAAh%2FhpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh%2BQQJCgAAACwAAAAAIAAgAAAE5xDISWlhperN52JLhSSdRgwVo1ICQZRUsiwHpTJT4iowNS8vyW2icCF6k8HMMBkCEDskxTBDAZwuAkkqIfxIQyhBQBFvAQSDITM5VDW6XNE4KagNh6Bgwe60smQUB3d4Rz1ZBApnFASDd0hihh12BkE9kjAJVlycXIg7CQIFA6SlnJ87paqbSKiKoqusnbMdmDC2tXQlkUhziYtyWTxIfy6BE8WJt5YJvpJivxNaGmLHT0VnOgSYf0dZXS7APdpB309RnHOG5gDqXGLDaC457D1zZ%2FV%2FnmOM82XiHRLYKhKP1oZmADdEAAAh%2BQQJCgAAACwAAAAAIAAgAAAE6hDISWlZpOrNp1lGNRSdRpDUolIGw5RUYhhHukqFu8DsrEyqnWThGvAmhVlteBvojpTDDBUEIFwMFBRAmBkSgOrBFZogCASwBDEY%2FCZSg7GSE0gSCjQBMVG023xWBhklAnoEdhQEfyNqMIcKjhRsjEdnezB%2BA4k8gTwJhFuiW4dokXiloUepBAp5qaKpp6%2BHo7aWW54wl7obvEe0kRuoplCGepwSx2jJvqHEmGt6whJpGpfJCHmOoNHKaHx61WiSR92E4lbFoq%2BB6QDtuetcaBPnW6%2BO7wDHpIiK9SaVK5GgV543tzjgGcghAgAh%2BQQJCgAAACwAAAAAIAAgAAAE7hDISSkxpOrN5zFHNWRdhSiVoVLHspRUMoyUakyEe8PTPCATW9A14E0UvuAKMNAZKYUZCiBMuBakSQKG8G2FzUWox2AUtAQFcBKlVQoLgQReZhQlCIJesQXI5B0CBnUMOxMCenoCfTCEWBsJColTMANldx15BGs8B5wlCZ9Po6OJkwmRpnqkqnuSrayqfKmqpLajoiW5HJq7FL1Gr2mMMcKUMIiJgIemy7xZtJsTmsM4xHiKv5KMCXqfyUCJEonXPN2rAOIAmsfB3uPoAK%2B%2BG%2Bw48edZPK%2BM6hLJpQg484enXIdQFSS1u6UhksENEQAAIfkECQoAAAAsAAAAACAAIAAABOcQyEmpGKLqzWcZRVUQnZYg1aBSh2GUVEIQ2aQOE%2BG%2BcD4ntpWkZQj1JIiZIogDFFyHI0UxQwFugMSOFIPJftfVAEoZLBbcLEFhlQiqGp1Vd140AUklUN3eCA51C1EWMzMCezCBBmkxVIVHBWd3HHl9JQOIJSdSnJ0TDKChCwUJjoWMPaGqDKannasMo6WnM562R5YluZRwur0wpgqZE7NKUm%2BFNRPIhjBJxKZteWuIBMN4zRMIVIhffcgojwCF117i4nlLnY5ztRLsnOk%2BaV%2BoJY7V7m76PdkS4trKcdg0Zc0tTcKkRAAAIfkECQoAAAAsAAAAACAAIAAABO4QyEkpKqjqzScpRaVkXZWQEximw1BSCUEIlDohrft6cpKCk5xid5MNJTaAIkekKGQkWyKHkvhKsR7ARmitkAYDYRIbUQRQjWBwJRzChi9CRlBcY1UN4g0%2FVNB0AlcvcAYHRyZPdEQFYV8ccwR5HWxEJ02YmRMLnJ1xCYp0Y5idpQuhopmmC2KgojKasUQDk5BNAwwMOh2RtRq5uQuPZKGIJQIGwAwGf6I0JXMpC8C7kXWDBINFMxS4DKMAWVWAGYsAdNqW5uaRxkSKJOZKaU3tPOBZ4DuK2LATgJhkPJMgTwKCdFjyPHEnKxFCDhEAACH5BAkKAAAALAAAAAAgACAAAATzEMhJaVKp6s2nIkolIJ2WkBShpkVRWqqQrhLSEu9MZJKK9y1ZrqYK9WiClmvoUaF8gIQSNeF1Er4MNFn4SRSDARWroAIETg1iVwuHjYB1kYc1mwruwXKC9gmsJXliGxc%2BXiUCby9ydh1sOSdMkpMTBpaXBzsfhoc5l58Gm5yToAaZhaOUqjkDgCWNHAULCwOLaTmzswadEqggQwgHuQsHIoZCHQMMQgQGubVEcxOPFAcMDAYUA85eWARmfSRQCdcMe0zeP1AAygwLlJtPNAAL19DARdPzBOWSm1brJBi45soRAWQAAkrQIykShQ9wVhHCwCQCACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiRMDjI0Fd30%2FiI2UA5GSS5UDj2l6NoqgOgN4gksEBgYFf0FDqKgHnyZ9OX8HrgYHdHpcHQULXAS2qKpENRg7eAMLC7kTBaixUYFkKAzWAAnLC7FLVxLWDBLKCwaKTULgEwbLA4hJtOkSBNqITT3xEgfLpBtzE%2FjiuL04RGEBgwWhShRgQExHBAAh%2BQQJCgAAACwAAAAAIAAgAAAE7xDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfZiCqGk5dTESJeaOAlClzsJsqwiJwiqnFrb2nS9kmIcgEsjQydLiIlHehhpejaIjzh9eomSjZR%2BipslWIRLAgMDOR2DOqKogTB9pCUJBagDBXR6XB0EBkIIsaRsGGMMAxoDBgYHTKJiUYEGDAzHC9EACcUGkIgFzgwZ0QsSBcXHiQvOwgDdEwfFs0sDzt4S6BK4xYjkDOzn0unFeBzOBijIm1Dgmg5YFQwsCMjp1oJ8LyIAACH5BAkKAAAALAAAAAAgACAAAATwEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GGl6NoiPOH16iZKNlH6KmyWFOggHhEEvAwwMA0N9GBsEC6amhnVcEwavDAazGwIDaH1ipaYLBUTCGgQDA8NdHz0FpqgTBwsLqAbWAAnIA4FWKdMLGdYGEgraigbT0OITBcg5QwPT4xLrROZL6AuQAPUS7bxLpoWidY0JtxLHKhwwMJBTHgPKdEQAACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GAULDJCRiXo1CpGXDJOUjY%2BYip9DhToJA4RBLwMLCwVDfRgbBAaqqoZ1XBMHswsHtxtFaH1iqaoGNgAIxRpbFAgfPQSqpbgGBqUD1wBXeCYp1AYZ19JJOYgH1KwA4UBvQwXUBxPqVD9L3sbp2BNk2xvvFPJd%2BMFCN6HAAIKgNggY0KtEBAAh%2BQQJCgAAACwAAAAAIAAgAAAE6BDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfYIDMaAFdTESJeaEDAIMxYFqrOUaNW4E4ObYcCXaiBVEgULe0NJaxxtYksjh2NLkZISgDgJhHthkpU4mW6blRiYmZOlh4JWkDqILwUGBnE6TYEbCgevr0N1gH4At7gHiRpFaLNrrq8HNgAJA70AWxQIH1%2BvsYMDAzZQPC9VCNkDWUhGkuE5PxJNwiUK4UfLzOlD4WvzAHaoG9nxPi5d%2BjYUqfAhhykOFwJWiAAAIfkECQoAAAAsAAAAACAAIAAABPAQyElpUqnqzaciSoVkXVUMFaFSwlpOCcMYlErAavhOMnNLNo8KsZsMZItJEIDIFSkLGQoQTNhIsFehRww2CQLKF0tYGKYSg%2BygsZIuNqJksKgbfgIGepNo2cIUB3V1B3IvNiBYNQaDSTtfhhx0CwVPI0UJe0%2Bbm4g5VgcGoqOcnjmjqDSdnhgEoamcsZuXO1aWQy8KAwOAuTYYGwi7w5h%2BKr0SJ8MFihpNbx%2B4Erq7BYBuzsdiH1jCAzoSfl0rVirNbRXlBBlLX%2BBP0XJLAPGzTkAuAOqb0WT5AH7OcdCm5B8TgRwSRKIHQtaLCwg1RAAAOwAAAAAAAAAAAA%3D%3D);
+
+		visibility: visible;
+		opacity: 0.6;
+		transition: all 0.3s ease;
+	}
+
+	.slidey .overlay header {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 40px;
+		z-index: 2;
+		border-bottom: 1px solid #222;
+	}
+		.slidey .overlay header a {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			line-height: 36px;
+			padding: 0 10px;
+			float: right;
+			opacity: 0.6;
+
+			box-sizing: border-box;
+		}
+			.slidey .overlay header a:hover {
+				opacity: 1;
+			}
+			.slidey .overlay header a .icon {
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+
+				background-position: 50% 50%;
+				background-size: 100%;
+				background-repeat: no-repeat;
+			}
+			.slidey .overlay header a.close .icon {
+				background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABkklEQVRYR8WX4VHDMAxG6wnoJrABZQPYBCaBTWAD2g1gE5gg6OOsXuxIlr40d81dfrSJ9V4c2VLK7spHuTJ/5wpM07QXuXc5X0opX2tEJcadjHuV80li/FgxTIEK/5QBCICBD6xEhSMGHgQPgBgLiYVAB1dpSqKDawxTohFw4JSEA3clzgIBPCURwE2JucBR7rhPJJv5OpJwDX+SfDjgx1wACQeJG1aChP9K/IMmdZ8DtESV1WyP3Bt4MwM6sj4NMxMYiqUWHQu4KYA/SYkIjOsm3BXYWMKFDwU2khjCQ4ELJUJ4SmClRArOCmSXGuKma0fYD5CbzHxFpCSGAhfAVSSUGDUk2BWZaff2g6GE15BsBQ9nwmpIGDiyHQddwNTMKkbZaf9fajXQca1EX44puJZUsnY0ObGmITE3GVLCbEhQUjGVt146j6oasWN+49Vph2w1pZ5EansNZqKBm1txbU57iRRcZ86RWMDdWtBJUHBHwoQPi1GV+JCbntmvok7iTX4/Up9mgyTc/FJYDTcndgH/AA5A/CHsyEkVAAAAAElFTkSuQmCC);
+			}
+			.slidey .overlay header a.external .icon {
+				background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcElEQVRYR+2WSQoAIQwEzf8f7XiOMkUQxUPlGkM3hVmiQfQR9GYnH1SsAQlI4DiBqkCMoNb9y2e90IAEJPAcgdznU9+engMaeJ7Azh5Y1U67gAho4DqBqmB1buAf0MB1AlVBek83ZPkmJMGc1wAR+AAqod/B97TRpQAAAABJRU5ErkJggg==);
+			}
+
+	.slidey .overlay .viewport {
+		position: absolute;
+		display: flex;
+		top: 40px;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.slidey .overlay.overlay-preview .viewport iframe {
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		max-height: 100%;
+		border: 0;
+
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease;
+	}
+
+	.slidey .overlay.overlay-preview.loaded .viewport iframe {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.slidey .overlay.overlay-preview.loaded .viewport-inner  {
+		position: absolute;
+		z-index: -1;
+		left: 0;
+		top: 45%;
+		width: 100%;
+		text-align: center;
+		letter-spacing: normal;
+	}
+	.slidey .overlay.overlay-preview .x-frame-error  {
+		opacity: 0;
+		transition: opacity 0.3s ease 0.3s;
+	}
+	.slidey .overlay.overlay-preview.loaded .x-frame-error  {
+		opacity: 1;
+	}
+
+	.slidey .overlay.overlay-preview.loaded .spinner {
+		opacity: 0;
+		visibility: hidden;
+		transform: scale(0.2);
+	}
+
+	.slidey .overlay.overlay-help .viewport {
+		overflow: auto;
+		color: #fff;
+	}
+
+	.slidey .overlay.overlay-help .viewport .viewport-inner {
+		width: 600px;
+		margin: auto;
+		padding: 20px 20px 80px 20px;
+		text-align: center;
+		letter-spacing: normal;
+	}
+
+	.slidey .overlay.overlay-help .viewport .viewport-inner .title {
+		font-size: 20px;
+	}
+
+	.slidey .overlay.overlay-help .viewport .viewport-inner table {
+		border: 1px solid #fff;
+		border-collapse: collapse;
+		font-size: 16px;
+	}
+
+	.slidey .overlay.overlay-help .viewport .viewport-inner table th,
+	.slidey .overlay.overlay-help .viewport .viewport-inner table td {
+		width: 200px;
+		padding: 14px;
+		border: 1px solid #fff;
+		vertical-align: middle;
+	}
+
+	.slidey .overlay.overlay-help .viewport .viewport-inner table th {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+
+
+
+/*********************************************
+ * PLAYBACK COMPONENT
+ *********************************************/
+
+.slidey .playback {
+	position: absolute;
+	left: 15px;
+	bottom: 20px;
+	z-index: 30;
+	cursor: pointer;
+	transition: all 400ms ease;
+	-webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
+}
+
+.slidey.overview .playback {
+	opacity: 0;
+	visibility: hidden;
+}
+
+
+/*********************************************
+ * ROLLING LINKS
+ *********************************************/
+
+.slidey .roll {
+	display: inline-block;
+	line-height: 1.2;
+	overflow: hidden;
+
+	vertical-align: top;
+	perspective: 400px;
+	perspective-origin: 50% 50%;
+}
+	.slidey .roll:hover {
+		background: none;
+		text-shadow: none;
+	}
+.slidey .roll span {
+	display: block;
+	position: relative;
+	padding: 0 2px;
+
+	pointer-events: none;
+	transition: all 400ms ease;
+	transform-origin: 50% 0%;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+}
+	.slidey .roll:hover span {
+	    background: rgba(0,0,0,0.5);
+	    transform: translate3d( 0px, 0px, -45px ) rotateX( 90deg );
+	}
+.slidey .roll span:after {
+	content: attr(data-title);
+
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 0 2px;
+	backface-visibility: hidden;
+	transform-origin: 50% 0%;
+	transform: translate3d( 0px, 110%, 0px ) rotateX( -90deg );
+}
+
+
+/*********************************************
+ * SPEAKER NOTES
+ *********************************************/
+
+// Hide on-page notes
+.slidey aside.notes {
+	display: none;
+}
+
+// An interface element that can optionally be used to show the
+// speaker notes to all viewers, on top of the presentation
+.slidey .speaker-notes {
+	display: none;
+	position: absolute;
+	width: 25vw;
+	height: 100%;
+	top: 0;
+	left: 100%;
+	padding: 14px 18px 14px 18px;
+	z-index: 1;
+	font-size: 18px;
+	line-height: 1.4;
+	border: 1px solid rgba( 0, 0, 0, 0.05 );
+	color: #222;
+	background-color: #f5f5f5;
+	overflow: auto;
+	box-sizing: border-box;
+	text-align: left;
+	font-family: Helvetica, sans-serif;
+	-webkit-overflow-scrolling: touch;
+
+	.notes-placeholder {
+		color: #ccc;
+		font-style: italic;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:before {
+		content: 'Speaker notes';
+		display: block;
+		margin-bottom: 10px;
+		opacity: 0.5;
+	}
+}
+
+
+.slidey.show-notes {
+	max-width: 75vw;
+	overflow: visible;
+}
+
+.slidey.show-notes .speaker-notes {
+	display: block;
+}
+
+@media screen and (min-width: 1600px) {
+	.slidey .speaker-notes {
+		font-size: 20px;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.slidey.show-notes {
+		border-left: 0;
+		max-width: none;
+		max-height: 70%;
+		overflow: visible;
+	}
+
+	.slidey.show-notes .speaker-notes {
+		top: 100%;
+		left: 0;
+		width: 100%;
+		height: (30/0.7)*1%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.slidey.show-notes {
+		max-height: 60%;
+	}
+
+	.slidey.show-notes .speaker-notes {
+		top: 100%;
+		height: (40/0.6)*1%;
+	}
+
+	.slidey .speaker-notes {
+		font-size: 14px;
+	}
+}
+
+
+/*********************************************
+ * ZOOM PLUGIN
+ *********************************************/
+
+.zoomed .slidey *,
+.zoomed .slidey *:before,
+.zoomed .slidey *:after {
+	backface-visibility: visible !important;
+}
+
+.zoomed .slidey .progress,
+.zoomed .slidey .controls {
+	opacity: 0;
+}
+
+.zoomed .slidey .roll span {
+	background: none;
+}
+
+.zoomed .slidey .roll span:after {
+	visibility: hidden;
+}
