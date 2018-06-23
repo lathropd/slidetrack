@@ -544,52 +544,6 @@ body {
 
 
 
-
-/*********************************************
- * FALLBACK
- *********************************************/
-
-.no-transforms {
-	overflow-y: auto;
-}
-
-.no-transforms .slidey .slides {
-	position: relative;
-	width: 80%;
-	height: auto !important;
-	top: 0;
-	left: 50%;
-	margin: 0;
-	text-align: center;
-}
-
-.no-transforms .slidey .controls,
-.no-transforms .slidey .progress {
-	display: none !important;
-}
-
-.no-transforms .slidey .slides section {
-	display: block !important;
-	opacity: 1 !important;
-	position: relative !important;
-	height: auto;
-	min-height: 0;
-	top: 0;
-	left: -50%;
-	margin: 70px 0;
-	transform: none;
-}
-
-.no-transforms .slidey .slides section section {
-	left: 0;
-}
-
-.slidey .no-transition,
-.slidey .no-transition * {
-	transition: none !important;
-}
-
-
 /*********************************************
  * PER-SLIDE BACKGROUNDS
  *********************************************/
