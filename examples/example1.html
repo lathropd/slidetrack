@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Slidey Slides Example 1</title>
-      <meta name="description" content="An awesome framework for web storytelling">
-      <meta name="author" content="Daniel Lathrop">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+    <meta name="description" content="An awesome framework for web storytelling">
+    <meta name="author" content="Daniel Lathrop">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="../src/css/slideyslides.css">
-  </head>
-  <body>
-      <div class="slidey">
-          <div class="slides">
-              <section id="slide-01">
-                  <h1>SlideySlides.js</h1>
-                  <h1>A presentation library</h1>
-              </section>
-              <section id="slide-02" class="present">
-                  <h1>SlideySlides.js</h1>
-                  <h1>Slide 2</h1>
-              </section>
-          </div>
+</head>
+<body>
+    <div class="slidey">
+        <div class="slides">
+            <section id="slide-01">
+                <h1>SlideySlides.js</h1>
+                <h1>A presentation library</h1>
+            </section>
+            <section id="slide-02" class="current">
+                <h1>SlideySlides.js</h1>
+                <h1>Slide 2</h1>
+            </section>
+        </div>
+    </div>
+    <script src="../index.js"></script>
+    <script>
+        slidey.run();
 
-      </div>
-      <script src="../index.js"></script>
-      <script>
-          ss.run();
-      </script>
-  </body>
+    </script>
+</body>
 </html>

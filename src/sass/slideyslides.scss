@@ -1,25 +1,69 @@
 @import "../../lib/sass/bourbon/bourbon";
-@import "slidey";
 
 
-// Create some good styling
+/*********************************************
+ * VARIABLES
+ *********************************************/
+$background_color: #ffffcc;
+
+
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+html,
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	position: relative;
+	line-height: 1;
+
+	background-color: #fff;
+	color: #000;
+}
 
 
 
 
-    $background_color: #ffffcc;
+
+/*********************************************
+ * Main slide setup
+ *********************************************/
 
 .slidey {
+    height: 100%;
+    width: 100%;
     .slides {
         // use flexbox for vertical centering
         display: flex;
         align-items: center;
-
-        // import bourbon bitters inside .slidey .slides
-        // find some alternative for this.
-        @import "../../lib/sass/base/base";
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
     }
 
+    .slides section {
+        display: none;
+    }
+
+    .slides section.current {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .slides section.next {
+
+    }
+
+    .slides section.previous {
+
+    }
 
 
 
