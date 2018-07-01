@@ -4,7 +4,7 @@
 
 It's especially optimized for adding a visual "track" to longform audio storyeliing of the kind done by [Reveal](https://www.revealnews.org/) and [APM Reports](https://www.apmreports.org/). 
 
-It's based heavily on a storyboard metaphor and inspred heavily by the [reveal.js](https://revealjs.com/).
+It's based heavily on a storyboard metaphor and inspred heavily by [reveal.js](https://revealjs.com/).
 
 ## Dependencies
 - [Page.js](https://visionmedia.github.io/page.js/) for routing. It's a bit heavy, and could probably be swapped out later
