@@ -6,3 +6,29 @@ It's especially optimized for adding a visual "track" to longform audio storyeli
 
 It's based heavily on a storyboard metaphor and inspred heavily by the [reveal.js](https://revealjs.com/).
 
+## Dependencies
+- [Page.js](https://visionmedia.github.io/page.js/) for routing. It's a bit heavy, and could probably be swapped out later
+   - Used instead of [Backbone.js](http://backbonejs.org/)  bececause we only wanted the [router](http://backbonejs.org/#Router)
+- Probably need to use something for DOM manipulation...
+- [animate.css](https://github.com/daneden/animate.css) animations
+- [bideo.js](https://github.com/rishabhp/bideo.js) fill a container with autoplaying background video
+
+
+
+## Potentially useful tools:
+- [vivify](https://github.com/Martz90/vivify) css animations library (57.2kb minified)
+- [Sparks](https://aftertheflood.com/projects/sparks/) sparkline typeface
+- [Animatelo](https://github.com/gibbok/animatelo) animate.css ported to the web animations api
+- [Emergence.js](https://github.com/xtianmiller/emergence.js) does stuff when elements appear in the browser
+- [AnimateMate](http://animatemate.com/) make keyframed animations inside Sketch
+- [repaintless](https://github.com/szynszyliszys/repaintless) css transitions library that only uses things that don't require repainting... so smoother, faster (10kb)
+- [Shave](https://dollarshaveclub.github.io/shave/) text truncation library
+- [mo.js](http://mojs.io/) motion graphics library ... probably something for another day
+
+
+## Information to use in the design
+
+- [Mozilla documentation on keeping load times fast](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Author_fast-loading_HTML_pages)
+- [Brief, not great explanation of why a file should ideally be 14kb or less](https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/)
+
+
