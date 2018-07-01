@@ -39,6 +39,9 @@ jspm_packages/
 # TypeScript v1 declaration files
 typings/
 
+# Dist folder created by parcel watch
+dist/
+
 # Optional npm cache directory
 .npm
 
