@@ -71,21 +71,19 @@ slidey.prototype = {
         // TODO: deal with nested sections
         this.totalSlides = sections.length;
         sections.forEach((section, index) => {
+
             // generate id including 0-padded, 0-base index
             // then add it as the id
-            var slideID = SLIDE_ID_PREFIX + index.toString().padStart(SLIDE_INDEX_DIGITS,"0");
+            var slideID = slideIndexToID(index);
             section.setAttribute("id", slideID);
+
+            // hide all but current slide
             if (index == this.currentSlide) {
                 section.classList.add("current")
             } else {
                  section.classList.remove("current")
             }
         });
-
-
-//        generate an ID for the "current slide" and then make it active
-//        var slideID = `#${SLIDE_ID_PREFIX}${this.currentSlide.toString().padStart(SLIDE_INDEX_DIGITS, "0")}`;
-//        this.parentContainer.querySelector(slideID).classList.add("current");
 
         this.play();
     },
@@ -97,11 +95,6 @@ slidey.prototype = {
 
     pause: function () {
         console.log("pause slidey slide")
-    },
-
-    next: function () {
-        this.currentSlide += 1;
-        console.log(`(next) go to slide ${this.currentSlide}`);
     },
 
     next: function () {
@@ -135,6 +128,13 @@ slidey.prototype = {
 
 
 
+}
+
+
+// this is in global scope for the module, but after compilation/etc. will be private to it
+function slideIndexToID(index) {
+    var slideID = SLIDE_ID_PREFIX + index.toString().padStart(SLIDE_INDEX_DIGITS,"0");
+    return slideID;
 }
 
 
