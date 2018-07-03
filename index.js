@@ -1,8 +1,12 @@
 "use strict";
-const slidey = import("./src/js/slidey.js");
 
-const page = require("page");
-import "./src/sass/slideyslides.scss";
+//const page = require("page");
+//const slidey =  require("./src/js/slidey");
+//import "./src/sass/slideyslides.scss";
+//import "./src/js/slidey";
+
+
+var slideshow = new slidey({});
 
 
 //// simple code to calculate height offset for each section element
@@ -17,7 +21,17 @@ import "./src/sass/slideyslides.scss";
 //    section.style.top = secOffset+"px"
 //}
 
-console.log(page);
 console.log("slidey");
 
-console.log(slidey)
+
+slideshow.run();
+slideshow.load("");
+slideshow.next();
+slideshow.prev();
+slideshow.goto(4);
+slideshow.pause();
+
+
+console.log(slidey);
+
+window.slidehsow = slideshow;

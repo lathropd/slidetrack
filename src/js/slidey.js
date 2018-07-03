@@ -74,6 +74,4 @@ slidey.prototype = {
 
 }
 
-export function slidey (params) {
-    return slidey(params);
-}
+module.exports = slidey;
