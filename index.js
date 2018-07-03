@@ -29,6 +29,9 @@ slideshow.next();
 slideshow.next();
 slideshow.prev();
 slideshow.prev();
+slideshow.next();
+
+
 
 slideshow.pause();
 
