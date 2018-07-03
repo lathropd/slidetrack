@@ -63,14 +63,6 @@ slidey.prototype = {
     },
 
     go: function () {
-
-
-
-
-
-
-
-
         /*  grab all the sections inside the parent
             */
         var sections = this.parentContainer.querySelectorAll("section");
@@ -95,8 +87,6 @@ slidey.prototype = {
 //        var slideID = `#${SLIDE_ID_PREFIX}${this.currentSlide.toString().padStart(SLIDE_INDEX_DIGITS, "0")}`;
 //        this.parentContainer.querySelector(slideID).classList.add("current");
 
-
-
         this.play();
     },
 
@@ -115,19 +105,14 @@ slidey.prototype = {
     },
 
     next: function () {
-        this.currentSlide += 1;
-        if (this.currentSlide > (this.totalSlides - 1)) {
-            this.currentSlide = this.totalSlides - 1;
-        }
-        console.log(`(next) go to slide ${this.currentSlide}`);
+        this.goto(this.currentSlide + 1);
+        console.log(`(next) go to slide ${this.currentSlide + 1}`);
+
     },
 
     prev: function () {
-        this.currentSlide += -1;
-        if (this.currentSlide < 0) {
-            this.currentSlide = 0;
-        }
-        console.log(`(previous) go to slide ${this.currentSlide}`);
+        this.goto(this.currentSlide - 1);
+        console.log(`(prev) go to slide ${this.currentSlide - 1}`);
     },
 
     goto: function (index) {
