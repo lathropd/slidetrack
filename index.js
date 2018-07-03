@@ -23,15 +23,19 @@ console.log("slidey");
 
 slideshow.run();
 slideshow.load("");
-slideshow.goto(0);
+
+
 slideshow.next();
 slideshow.next();
-slideshow.next();
-slideshow.goto(1);
 slideshow.prev();
 slideshow.prev();
-slideshow.goto(4);
+
 slideshow.pause();
+
+slideshow.goto(0);
+slideshow.goto(4);
+slideshow.goto(1);
+
 
 
 console.log(slidey);
