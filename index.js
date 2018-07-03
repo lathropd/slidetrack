@@ -1,10 +1,6 @@
 "use strict";
 const slidey = require("./src/js/slidey.js")
-
-    //const page = require("page");
-//const slidey =  require("./src/js/slidey");
-//import "./src/sass/slideyslides.scss";
-//import "./src/js/slidey";
+import "./src/sass/slideyslides.scss";
 
 
 var slideshow = new slidey({});
