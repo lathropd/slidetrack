@@ -37,9 +37,9 @@ var slidey = function (params) {
         <section>. if it's a string, use that as a selector. otherwise assume
         that it's an element. */
     if (!this.parentContainer) { // any falsy value
-            this.parentContainer = document.querySelector("section").parentElement;
-        } else if (typeof(this.parentContainer) == "string") {
-            this.parentContainer = document.querySelector(this.parentContainer)
+        this.parentContainer = document.querySelector("section").parentElement;
+    } else if (typeof (this.parentContainer) == "string") {
+        this.parentContainer = document.querySelector(this.parentContainer)
     }
 
     /* TODO: CREATE A DIV INSIDE THE SLIDEY THAT JUST CONTAINS THE SECTIONS */
@@ -64,7 +64,7 @@ slidey.prototype = {
 
     go: function () {
         /*  grab all the sections inside the parent
-            */
+         */
         var sections = this.parentContainer.querySelectorAll("section");
 
         // give them ids
@@ -81,7 +81,7 @@ slidey.prototype = {
             if (index == this.currentSlide) {
                 section.classList.add("current")
             } else {
-                 section.classList.remove("current")
+                section.classList.remove("current")
             }
         });
 
@@ -98,27 +98,38 @@ slidey.prototype = {
     },
 
     next: function () {
+        console.log(`(next) current slide is ${this.currentSlide}`);
+        console.log(`(next) try go to slide ${this.currentSlide + 1}`);
         this.goto(this.currentSlide + 1);
-        console.log(`(next) go to slide ${this.currentSlide + 1}`);
-
     },
 
     prev: function () {
+        console.log(`(prev) current slide is ${this.currentSlide}`);
+        console.log(`(prev) try go to slide ${this.currentSlide - 1}`);
         this.goto(this.currentSlide - 1);
-        console.log(`(prev) go to slide ${this.currentSlide - 1}`);
     },
 
-    goto: function (index) {
-        if (index >= 0 & index < this.totalSlides) {
-            this.currentSlide = index;
-            console.log(`(goto) go to slide ${this.currentSlide}`);
-        }  else {
+    goto: function (newSlide) {
+        if (newSlide >= 0 & newSlide < this.totalSlides) {
+            this.currentSlide = newSlide;
+            console.log(`(goto) go to slide ${newSlide}`);
+            var sections = this.parentContainer.querySelectorAll("section");
+            sections.forEach((section, index) => {
+                // hide all but current slide
+                if (index == newSlide) {
+                    section.classList.add("current");
+                } else {
+                    section.classList.remove("current");
+                }
+            })
+        } else {
             console.log(`(goto) invalid index, staying at slide ${this.currentSlide}`);
         }
     },
 
-    load: function(source) {
-        if( source[0] == "#") {
+
+    load: function (source) {
+        if (source[0] == "#") {
             console.log("parse from div");
         } else {
             console.log("load and parse from url");
@@ -133,7 +144,7 @@ slidey.prototype = {
 
 // this is in global scope for the module, but after compilation/etc. will be private to it
 function slideIndexToID(index) {
-    var slideID = SLIDE_ID_PREFIX + index.toString().padStart(SLIDE_INDEX_DIGITS,"0");
+    var slideID = SLIDE_ID_PREFIX + index.toString().padStart(SLIDE_INDEX_DIGITS, "0");
     return slideID;
 }
 
