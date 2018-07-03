@@ -1,6 +1,11 @@
 "use strict"
 const page = require("../../lib/page.js/page");
+//import "babel-polyfill";
 
+const PLAYER_CLASS = "slidey"; // goes on body to activate the page
+const SLIDESET_CLASS = "slides";
+const SLIDE_ID_PREFIX = "slide-";
+const SLIDE_INDEX_DIGITS = 3;
 
 //const slidey = {
 //    run: () => { this.setup(); console.log("slide!")},
@@ -18,16 +23,63 @@ var slidey = function (params) {
     this.currentSlide = 0;
     this.totalSlides = 10;
     this.loadFrom = false;
+    this.parentContainer = false;
     console.log("setup slidey slides")
 }
 
 slidey.prototype = {
 
     run: function () {
+        console.log("run slidey slide")
+
+        /* load the slides if needed */
         if (this.loadFrom != false) {
             this.load(this.loadFrom);
+        } else {
+            this.go();
         }
-        console.log("run slidey slide")
+    },
+
+    go: function () {
+
+        /*  if a parent container isn't defined, use the parent of the first
+            <section>. if it's a string, use that as a selector. otherwise assume
+            that it's an element. */
+
+        if (!this.parentContainer) { // any falsy value
+            this.parentContainer = document.querySelector("section").parentElement;
+        } else if (typeof(this.parentContainer) == "string") {
+            this.parentContainer = document.querySelector(this.parentContainer)
+        }
+
+
+        /* TODO: CREATE A DIV INSIDE THE SLIDEY THAT JUST CONTAINS THE SECTIONS */
+        //add the slideshow class to the parent container
+        this.parentContainer.classList.add(SLIDESET_CLASS);
+        this.parentContainer.parentElement.classList.add(PLAYER_CLASS);
+
+
+        /*  grab all the sections inside the parent
+            */
+        var sections = this.parentContainer.querySelectorAll("section");
+
+        // give them ids
+        // TODO: deal with nested sections
+        sections.forEach((section, index) => {
+            // generate id including 0-padded, 0-base index
+            // then add it as the id
+            var slideID = SLIDE_ID_PREFIX + index.toString().padStart(SLIDE_INDEX_DIGITS,"0");
+            section.setAttribute("id", slideID);
+        });
+
+
+
+        this.play();
+    },
+
+
+    play: function () {
+        console.log("start a new or paused slideshow")
     },
 
     pause: function () {
@@ -70,10 +122,12 @@ slidey.prototype = {
         } else {
             console.log("load and parse from url");
         }
+        this.go();
     },
 
 
 
 }
+
 
 module.exports = slidey;
