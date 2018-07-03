@@ -18,10 +18,16 @@ const SLIDE_INDEX_DIGITS = 3;
 
 
 
+// TODO: Add a loading spinner like these https://loading.io/css/?
+
+
+
+
+
 var slidey = function (params) {
     // mege the params into here
     this.currentSlide = 0;
-    this.totalSlides = 10;
+    this.totalSlides = null;
     this.loadFrom = false;
     this.parentContainer = false;
     console.log("setup slidey slides")
@@ -65,12 +71,23 @@ slidey.prototype = {
 
         // give them ids
         // TODO: deal with nested sections
+        this.totalSlides = sections.length;
         sections.forEach((section, index) => {
             // generate id including 0-padded, 0-base index
             // then add it as the id
             var slideID = SLIDE_ID_PREFIX + index.toString().padStart(SLIDE_INDEX_DIGITS,"0");
             section.setAttribute("id", slideID);
+            if (index == this.currentSlide) {
+                section.classList.add("current")
+            } else {
+                 section.classList.remove("current")
+            }
         });
+
+
+//        generate an ID for the "current slide" and then make it active
+//        var slideID = `#${SLIDE_ID_PREFIX}${this.currentSlide.toString().padStart(SLIDE_INDEX_DIGITS, "0")}`;
+//        this.parentContainer.querySelector(slideID).classList.add("current");
 
 
 
