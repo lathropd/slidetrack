@@ -31,6 +31,22 @@ var slidey = function (params) {
     this.loadFrom = false;
     this.parentContainer = false;
     console.log("setup slidey slides")
+
+
+    /*  if a parent container isn't defined, use the parent of the first
+        <section>. if it's a string, use that as a selector. otherwise assume
+        that it's an element. */
+    if (!this.parentContainer) { // any falsy value
+            this.parentContainer = document.querySelector("section").parentElement;
+        } else if (typeof(this.parentContainer) == "string") {
+            this.parentContainer = document.querySelector(this.parentContainer)
+    }
+
+    /* TODO: CREATE A DIV INSIDE THE SLIDEY THAT JUST CONTAINS THE SECTIONS */
+    //add the slideshow class to the parent container
+    this.parentContainer.classList.add(SLIDESET_CLASS);
+    this.parentContainer.parentElement.classList.add(PLAYER_CLASS);
+
 }
 
 slidey.prototype = {
@@ -48,21 +64,11 @@ slidey.prototype = {
 
     go: function () {
 
-        /*  if a parent container isn't defined, use the parent of the first
-            <section>. if it's a string, use that as a selector. otherwise assume
-            that it's an element. */
-
-        if (!this.parentContainer) { // any falsy value
-            this.parentContainer = document.querySelector("section").parentElement;
-        } else if (typeof(this.parentContainer) == "string") {
-            this.parentContainer = document.querySelector(this.parentContainer)
-        }
 
 
-        /* TODO: CREATE A DIV INSIDE THE SLIDEY THAT JUST CONTAINS THE SECTIONS */
-        //add the slideshow class to the parent container
-        this.parentContainer.classList.add(SLIDESET_CLASS);
-        this.parentContainer.parentElement.classList.add(PLAYER_CLASS);
+
+
+
 
 
         /*  grab all the sections inside the parent
