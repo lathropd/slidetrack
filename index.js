@@ -1,6 +1,7 @@
 "use strict";
+const slidey = require("./src/js/slidey.js")
 
-//const page = require("page");
+    //const page = require("page");
 //const slidey =  require("./src/js/slidey");
 //import "./src/sass/slideyslides.scss";
 //import "./src/js/slidey";
@@ -34,4 +35,12 @@ slideshow.pause();
 
 console.log(slidey);
 
-window.slidehsow = slideshow;
+module.exports = {
+    slideshow: slideshow,
+    slidey: slidey,
+}
+
+
+
+
+

@@ -1,4 +1,6 @@
 "use strict"
+const page = require("../../lib/page.js/page");
+
 
 //const slidey = {
 //    run: () => { this.setup(); console.log("slide!")},
