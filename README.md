@@ -11,7 +11,7 @@ It's based heavily on a storyboard metaphor and inspred heavily by [reveal.js](h
    - Used instead of [Backbone.js](http://backbonejs.org/)  bececause we only wanted the [router](http://backbonejs.org/#Router)
 - Probably need to use something for DOM manipulation...
 - [bideo.js](https://github.com/rishabhp/bideo.js) fill a container with autoplaying background video
-- [Animatelo](https://github.com/gibbok/animatelo) animate.css ported to the web animations api (used instead since it's a JS implementation)
+- [animate.css](https://github.com/daneden/animate.css) animations (because it seems to do everything)
 
 
 
@@ -20,13 +20,13 @@ It's based heavily on a storyboard metaphor and inspred heavily by [reveal.js](h
 - [vivify](https://github.com/Martz90/vivify) css animations library (57.2kb minified)
 - [Sparks](https://aftertheflood.com/projects/sparks/) sparkline typeface
 - [animate.css](https://github.com/daneden/animate.css) animations (because it seems to do everything)
-
-- [animate.css](https://github.com/daneden/animate.css) animations
 - [Emergence.js](https://github.com/xtianmiller/emergence.js) does stuff when elements appear in the browser
 - [AnimateMate](http://animatemate.com/) make keyframed animations inside Sketch
 - [repaintless](https://github.com/szynszyliszys/repaintless) css transitions library that only uses things that don't require repainting... so smoother, faster (10kb)
 - [Shave](https://dollarshaveclub.github.io/shave/) text truncation library
 - [mo.js](http://mojs.io/) motion graphics library ... probably something for another day
+
+- [Animatelo](https://github.com/gibbok/animatelo) animate.css ported to the web animations api (didn't play nicely with parcel)
 
 
 ## Information to use in the design
