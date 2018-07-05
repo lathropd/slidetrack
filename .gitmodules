@@ -7,6 +7,3 @@
 [submodule "lib/animatelo"]
 	path = lib/animatelo
 	url = https://github.com/gibbok/animatelo.git
-[submodule "lib/animate.css"]
-	path = lib/animate.css
-	url = https://github.com/daneden/animate.css

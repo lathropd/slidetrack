@@ -1,5 +1,9 @@
 "use strict"
-const page = require("../../lib/page.js/page");
+
+import animatelo from "../../lib/animatelo/dist/animatelo.min";
+import "web-animations-js";
+import page from "../../lib/page.js/page";
+
 //import "babel-polyfill";
 
 const PLAYER_CLASS = "slidey"; // goes on body to activate the page
@@ -79,9 +83,11 @@ slidey.prototype = {
 
             // hide all but current slide
             if (index == this.currentSlide) {
-                section.classList.add("current")
+                section.classList.add("current");
+
             } else {
                 section.classList.remove("current")
+
             }
         });
 
@@ -117,9 +123,15 @@ slidey.prototype = {
             sections.forEach((section, index) => {
                 // hide all but current slide
                 if (index == newSlide) {
+                    section.classList.add("animated");
+                    section.classList.add("fadeInLeft");
+                    section.classList.remove("fadeOutRight");
                     section.classList.add("current");
+
                 } else {
-                    section.classList.remove("current");
+                    section.classList.remove("fadeInLeft");
+                    section.classList.add("fadeOutRight");
+
                 }
             })
         } else {
