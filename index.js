@@ -1,6 +1,7 @@
 "use strict";
 const slidey = require("./src/js/slidey.js")
 import "./src/sass/slideyslides.scss";
+import "./lib/animate.css/animate.css";
 
 
 var slideshow = new slidey({});
