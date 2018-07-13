@@ -1,10 +1,11 @@
 "use strict";
 const slidey = require("./src/js/slidey.js")
-import "./src/sass/slideyslides.scss";
 
 
 var slideshow = new slidey({});
 
+console.log(slidey);
+console.log(slideshow);
 
 //// simple code to calculate height offset for each section element
 //var slideHeight = document.getElementsByClassName("slides")[0].offsetHeight;
@@ -21,33 +22,37 @@ var slideshow = new slidey({});
 console.log("slidey");
 
 
-slideshow.run();
-slideshow.load("");
-
-
-slideshow.next();
-slideshow.next();
-slideshow.prev();
-slideshow.prev();
-slideshow.next();
-
-
-
-slideshow.pause();
-
-slideshow.goto(0);
-slideshow.goto(4);
-slideshow.goto(1);
+//slideshow.run();
+//slideshow.load("");
+//
+//
+//slideshow.next();
+//slideshow.next();
+//slideshow.prev();
+//slideshow.prev();
+//slideshow.next();
+//
+//
+//
+//slideshow.pause();
+//
+//slideshow.goto(0);
+//slideshow.goto(4);
+//slideshow.goto(1);
 
 
 
 console.log(slidey);
 
+window.slideshow = slideshow;
+window.slidey = slidey;
+
+
+
 module.exports = {
     slideshow: slideshow,
     slidey: slidey,
 }
-
 
 
 
