@@ -1,8 +1,11 @@
 "use strict"
 
-import animatelo from "../../lib/animatelo/dist/animatelo.min";
 import "web-animations-js";
 import page from "../../lib/page.js/page";
+import "../sass/slideyslides.scss";
+import "../../lib/animatelo/dist/animatelo.min";
+
+
 
 //import "babel-polyfill";
 
@@ -10,6 +13,13 @@ const PLAYER_CLASS = "slidey"; // goes on body to activate the page
 const SLIDESET_CLASS = "slides";
 const SLIDE_ID_PREFIX = "slide-";
 const SLIDE_INDEX_DIGITS = 3;
+const SLIDE_STARTUP_FADE_TIME = 2000;
+const FADE_IN = animatelo.fadeIn;
+const SLIDE_IN_LEFT = animatelo.fadeInLeft;
+const SLIDE_IN_RIGHT = animatelo.fadeInRight;
+const SLIDE_OUT_LEFT = animatelo.fadeOutLeft;
+const SLIDE_OUT_RIGHT = animatelo.fadeOutRight;
+
 
 //const slidey = {
 //    run: () => { this.setup(); console.log("slide!")},
@@ -31,10 +41,16 @@ const SLIDE_INDEX_DIGITS = 3;
 var slidey = function (params) {
     // mege the params into here
     this.currentSlide = 0;
+    this.nextSlide = 1;
+    this.prevSlide = null;
     this.totalSlides = null;
     this.loadFrom = false;
     this.parentContainer = false;
-    console.log("setup slidey slides")
+    this.startupFadeInTime = SLIDE_STARTUP_FADE_TIME;
+    this.slideTimings = [[0, 0.0],[1, 5.2], [2, 6.5], [2.2, 7.4], [3, 8.5]]
+    this.slideTimes = this.slideTimings.map((i) => {return i[1]});
+
+    console.log("setup slidey slides");
 
 
     /*  if a parent container isn't defined, use the parent of the first
@@ -50,6 +66,7 @@ var slidey = function (params) {
     //add the slideshow class to the parent container
     this.parentContainer.classList.add(SLIDESET_CLASS);
     this.parentContainer.parentElement.classList.add(PLAYER_CLASS);
+    this.go();
 
 }
 
@@ -83,13 +100,15 @@ slidey.prototype = {
 
             // hide all but current slide
             if (index == this.currentSlide) {
-                section.classList.add("current");
+//                section.classList.add("current");
 
             } else {
-                section.classList.remove("current")
+
 
             }
         });
+
+        FADE_IN("#"+slideIndexToID(this.currentSlide), {duration: this.startupFadeInTime});
 
         this.play();
     },
@@ -116,24 +135,41 @@ slidey.prototype = {
     },
 
     goto: function (newSlide) {
+        var oldSlide = this.currentSlide;
+
         if (newSlide >= 0 & newSlide < this.totalSlides) {
+            // change current slide indices
             this.currentSlide = newSlide;
-            console.log(`(goto) go to slide ${newSlide}`);
-            var sections = this.parentContainer.querySelectorAll("section");
-            sections.forEach((section, index) => {
-                // hide all but current slide
-                if (index == newSlide) {
-                    section.classList.add("animated");
-                    section.classList.add("fadeInLeft");
-                    section.classList.remove("fadeOutRight");
-                    section.classList.add("current");
+            this.prevSlide = newSlide - 1;
+            this.nextSlide = newSlide + 1;
 
-                } else {
-                    section.classList.remove("fadeInLeft");
-                    section.classList.add("fadeOutRight");
+            // null out invalid slide indices
+            if (this.prevSlide < 0) this.prevSlide = null;
+            if (this.nextSlide < this.totalSlides) this.nextSlide = null;
 
-                }
-            })
+            // determine direction
+            if (oldSlide < newSlide) {
+
+                // slide out to the left and in from the right
+                SLIDE_OUT_LEFT("#"+slideIndexToID(oldSlide));
+                SLIDE_IN_RIGHT("#"+slideIndexToID(newSlide));
+
+
+
+
+            }  else if (oldSlide > newSlide) {
+
+                // slide out to the right and in from the lefy
+                SLIDE_OUT_RIGHT("#"+slideIndexToID(oldSlide));
+                SLIDE_IN_LEFT("#"+slideIndexToID(newSlide));
+
+
+            } else {
+
+                // null op, means we're staying put
+                console.log(`(goto)  index the same, staying at slide ${this.currentSlide}`);
+            }
+
         } else {
             console.log(`(goto) invalid index, staying at slide ${this.currentSlide}`);
         }
@@ -146,8 +182,31 @@ slidey.prototype = {
         } else {
             console.log("load and parse from url");
         }
-        this.go();
     },
+
+
+
+
+    slideGoto: function(seconds) {
+
+        // if we're outside the current time navigate to the correct time (and pontential fire a step)
+        if (seconds >  this.slideTimes[this.nextSlide] || seconds < this.slideTimes[this.currentSlide]  ) {
+
+            // create a list where slides before the current time are false,  after are true
+            var slidesTF = this.slidesTimes.map((slideTime) => {return (slideTime > time )});
+
+            var newSlide = slidesTF.indexOf(false);
+            if (newsSlide >  0 ) {
+                newslide += -1;
+            }
+            return newSlide;
+
+        }
+
+        return false;
+
+
+    }
 
 
 
@@ -162,3 +221,7 @@ function slideIndexToID(index) {
 
 
 module.exports = slidey;
+
+window.slideIndexToID = slideIndexToID;
+
+
