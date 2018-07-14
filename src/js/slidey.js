@@ -50,9 +50,7 @@ var slidey = function (params) {
     this.startupFadeInTime = SLIDE_STARTUP_FADE_TIME;
     this.slideTimings = [0.0,5.2,6.5];
 
-
     console.log("setup slidey slides");
-
 
     /*  if a parent container isn't defined, use the parent of the first
         <section>. if it's a string, use that as a selector. otherwise assume
@@ -68,7 +66,6 @@ var slidey = function (params) {
     this.parentContainer.classList.add(SLIDESET_CLASS);
     this.parentContainer.parentElement.classList.add(PLAYER_CLASS);
     this.go();
-
 }
 
 slidey.prototype = {
@@ -102,10 +99,8 @@ slidey.prototype = {
             // hide all but current slide
             if (index == this.currentSlide) {
 //                section.classList.add("current");
-
             } else {
-
-
+                "";
             }
         });
 
@@ -149,20 +144,15 @@ slidey.prototype = {
 
             // determine direction
             if (oldSlide < newSlide) {
-
                 // slide out to the left and in from the right
                 SLIDE_OUT_LEFT("#"+slideIndexToID(oldSlide));
                 SLIDE_IN_RIGHT("#"+slideIndexToID(newSlide));
-
-
-
 
             }  else if (oldSlide > newSlide) {
 
                 // slide out to the right and in from the lefy
                 SLIDE_OUT_RIGHT("#"+slideIndexToID(oldSlide));
                 SLIDE_IN_LEFT("#"+slideIndexToID(newSlide));
-
 
             } else {
 
@@ -211,4 +201,3 @@ function slideIndexToID(index) {
 module.exports = slidey;
 
 window.slideIndexToID = slideIndexToID;
-
