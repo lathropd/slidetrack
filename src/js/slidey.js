@@ -4,6 +4,7 @@ import "web-animations-js";
 import page from "../../lib/page.js/page";
 import "../sass/slideyslides.scss";
 import "../../lib/animatelo/dist/animatelo.min";
+const _ = require("lodash");
 
 
 
@@ -47,8 +48,8 @@ var slidey = function (params) {
     this.loadFrom = false;
     this.parentContainer = false;
     this.startupFadeInTime = SLIDE_STARTUP_FADE_TIME;
-    this.slideTimings = [[0, 0.0],[1, 5.2], [2, 6.5], [2.2, 7.4], [3, 8.5]]
-    this.slideTimes = this.slideTimings.map((i) => {return i[1]});
+    this.slideTimings = [0.0,5.2,6.5];
+
 
     console.log("setup slidey slides");
 
@@ -110,7 +111,6 @@ slidey.prototype = {
 
         FADE_IN("#"+slideIndexToID(this.currentSlide), {duration: this.startupFadeInTime});
 
-        this.play();
     },
 
 
@@ -184,32 +184,21 @@ slidey.prototype = {
         }
     },
 
+    timeToSlide: function (currentTime) {
+        // find the ID slide after the current timing
+        // it will be -1 if the current timing is in the last slide
+        var index =  this.slideTimings.map(function (i) { return (currentTime < i) }).indexOf(true);
 
-
-
-    slideGoto: function(seconds) {
-
-        // if we're outside the current time navigate to the correct time (and pontential fire a step)
-        if (seconds >  this.slideTimes[this.nextSlide] || seconds < this.slideTimes[this.currentSlide]  ) {
-
-            // create a list where slides before the current time are false,  after are true
-            var slidesTF = this.slidesTimes.map((slideTime) => {return (slideTime > time )});
-
-            var newSlide = slidesTF.indexOf(false);
-            if (newsSlide >  0 ) {
-                newslide += -1;
-            }
-            return newSlide;
-
+        if (index > 0) {
+            index = index - 1; // return the slide
+        } else {
+            index = this.slideTimings.length - 1; // return the last slide
         }
 
-        return false;
-
-
+        if (index != this.currentSlide) {
+            this.goto(index);
+        }
     }
-
-
-
 }
 
 
@@ -219,9 +208,7 @@ function slideIndexToID(index) {
     return slideID;
 }
 
-
 module.exports = slidey;
 
 window.slideIndexToID = slideIndexToID;
-
 
