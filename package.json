@@ -30,9 +30,8 @@
   "devDependencies": {
     "animatelo": "^1.0.3",
     "babel-polyfill": "^6.26.0",
-    "bourbon": "^5.0.1",
-    "bourbon-bitters": "^1.2.1",
     "chai": "^4.1.2",
+    "lodash": "^4.17.10",
     "mocha": "^5.2.0",
     "node-sass": "^4.9.0",
     "web-animations-js": "^2.3.1"
