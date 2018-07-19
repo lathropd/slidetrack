@@ -22,23 +22,25 @@ console.log(slideshow);
 console.log("slidey");
 
 
-//slideshow.run();
-//slideshow.load("");
-//
-//
-//slideshow.next();
-//slideshow.next();
-//slideshow.prev();
-//slideshow.prev();
-//slideshow.next();
-//
-//
-//
-//slideshow.pause();
-//
-//slideshow.goto(0);
-//slideshow.goto(4);
-//slideshow.goto(1);
+slideshow.run();
+slideshow.load("");
+
+setTimeout(() =>slideshow.next(), 1000);
+setTimeout(() =>slideshow.next(), 3000);
+setTimeout(() =>slideshow.next(), 6000);
+setTimeout(() =>slideshow.prev(), 8500);
+setTimeout(() =>slideshow.prev(), 11000);
+setTimeout(() =>slideshow.next(), 15000);
+setTimeout(() => slideshow.goto(0), 16000);
+setTimeout(() => slideshow.goto(0), 20000);
+setTimeout(() => slideshow.goto(4), 24000);
+setTimeout(() => slideshow.goto(1), 28000);
+
+slideshow.pause();
+
+
+;
+;
 
 
 
