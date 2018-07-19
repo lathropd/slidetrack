@@ -13,7 +13,7 @@ It's based heavily on a storyboard metaphor and inspred heavily by [reveal.js](h
 - [bideo.js](https://github.com/rishabhp/bideo.js) fill a container with autoplaying background video
 - [web-animations-js](https://www.npmjs.com/package/web-animations-js) a polyfill for adding web animations API support
 - [Animatelo](https://github.com/gibbok/animatelo) animate.css ported to the web animations api
-
+- [EasyTimer.js](https://albert-gonzalez.github.io/easytimer.js/) for timing independent of a playing media file
 
 
 ## Potentially useful tools:
@@ -33,5 +33,6 @@ It's based heavily on a storyboard metaphor and inspred heavily by [reveal.js](h
 
 - [Mozilla documentation on keeping load times fast](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Author_fast-loading_HTML_pages)
 - [Brief, not great explanation of why a file should ideally be 14kb or less](https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/)
+
 
 
