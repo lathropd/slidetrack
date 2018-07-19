@@ -14,7 +14,7 @@ It's based heavily on a storyboard metaphor and inspred heavily by [reveal.js](h
 - [web-animations-js](https://www.npmjs.com/package/web-animations-js) a polyfill for adding web animations API support
 - [Animatelo](https://github.com/gibbok/animatelo) animate.css ported to the web animations api
 - [EasyTimer.js](https://albert-gonzalez.github.io/easytimer.js/) for timing independent of a playing media file
-
+- [wavesurfer.js](https://wavesurfer-js.org/) for a really cool audio player
 
 ## Potentially useful tools:
 - [vivify](https://github.com/Martz90/vivify) css animations library (57.2kb minified)
@@ -26,13 +26,7 @@ It's based heavily on a storyboard metaphor and inspred heavily by [reveal.js](h
 - [Shave](https://dollarshaveclub.github.io/shave/) text truncation library
 - [mo.js](http://mojs.io/) motion graphics library ... probably something for another day
 
-
-
-
 ## Information to use in the design
 
 - [Mozilla documentation on keeping load times fast](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Author_fast-loading_HTML_pages)
 - [Brief, not great explanation of why a file should ideally be 14kb or less](https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/)
-
-
-
