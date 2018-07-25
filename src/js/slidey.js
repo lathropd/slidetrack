@@ -36,19 +36,34 @@ const SLIDE_OUT_RIGHT = animatelo.fadeOutRight;
 // TODO: Add a loading spinner like these https://loading.io/css/?
 
 
-
-
-
 var slidey = function (params) {
     // mege the params into here
-    this.currentSlide = 0;
-    this.nextSlide = 1;
-    this.prevSlide = null;
-    this.totalSlides = null;
-    this.loadFrom = false;
-    this.parentContainer = false;
-    this.startupFadeInTime = SLIDE_STARTUP_FADE_TIME;
-    this.slideTimings = [0.0,5.2,6.5];
+
+    // slide DOM params
+    this.loadFrom = params.loadFrom||false;
+    this.parentContainer = params.parentContainer||false;
+    this.slidesetClass = SLIDESET_CLASS;
+    this.playerClass = PLAYER_CLASS;
+
+    // slideshow startup settings
+    this.currentSlide = params.currentSlide||0;
+    this.nextSlide = params.nextSlide||1;
+    this.prevSlide = params.prevSlide||null;
+    this.totalSlides = null; // this will get overwritten anyway
+    this.slideTimings = params.slideTimings||[0.0,5.2,6.5];
+    this.timed = params.timed || false;
+    this.audio = params.audio || false;
+
+
+
+    // Transitions related settingd
+    this.startupFadeInTime = params.startupFadeInTime||SLIDE_STARTUP_FADE_TIME;
+    this.fadeIn = params.fadeIn || FADE_IN;
+    this.slideInLeft = params.slideInLeft||SLIDE_IN_LEFT;
+    this.slideInRight = params.slideInRight||SLIDE_IN_RIGHT;
+    this.slideOutLeft = params.slideOutLeft||SLIDE_OUT_RIGHT;
+    this.slideOutRight = params.slideOutRight||SLIDE_OUT_RIGHT;
+
 
     console.log("setup slidey slides");
 
@@ -63,8 +78,8 @@ var slidey = function (params) {
 
     /* TODO: CREATE A DIV INSIDE THE SLIDEY THAT JUST CONTAINS THE SECTIONS */
     //add the slideshow class to the parent container
-    this.parentContainer.classList.add(SLIDESET_CLASS);
-    this.parentContainer.parentElement.classList.add(PLAYER_CLASS);
+    this.parentContainer.classList.add(this.slidesetClass);
+    this.parentContainer.parentElement.classList.add(this.playerClass);
     this.go();
 }
 
@@ -145,14 +160,14 @@ slidey.prototype = {
             // determine direction
             if (oldSlide < newSlide) {
                 // slide out to the left and in from the right
-                SLIDE_OUT_LEFT("#"+slideIndexToID(oldSlide));
-                SLIDE_IN_RIGHT("#"+slideIndexToID(newSlide));
+                this.slideOutLeft("#"+slideIndexToID(oldSlide));
+                this.slideInRight("#"+slideIndexToID(newSlide));
 
             }  else if (oldSlide > newSlide) {
 
                 // slide out to the right and in from the lefy
-                SLIDE_OUT_RIGHT("#"+slideIndexToID(oldSlide));
-                SLIDE_IN_LEFT("#"+slideIndexToID(newSlide));
+                this.slideOutRight("#"+slideIndexToID(oldSlide));
+                this.slideInLeft("#"+slideIndexToID(newSlide));
 
             } else {
 
