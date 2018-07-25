@@ -7,9 +7,6 @@ import "../../lib/animatelo/dist/animatelo.min";
 const _ = require("lodash");
 
 
-
-//import "babel-polyfill";
-
 const PLAYER_CLASS = "slidey"; // goes on body to activate the page
 const SLIDESET_CLASS = "slides";
 const SLIDE_ID_PREFIX = "slide-";
