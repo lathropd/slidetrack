@@ -5,7 +5,7 @@ import page from "../../lib/page.js/page";
 import "../sass/slideyslides.scss";
 import "../../lib/animatelo/dist/animatelo.min";
 const _ = require("lodash");
-
+const fs = require("fs");
 
 const PLAYER_CLASS = "slidey"; // goes on body to activate the page
 const SLIDESET_CLASS = "slides";
@@ -18,6 +18,17 @@ const SLIDE_IN_RIGHT = animatelo.fadeInRight;
 const SLIDE_OUT_LEFT = animatelo.fadeOutLeft;
 const SLIDE_OUT_RIGHT = animatelo.fadeOutRight;
 
+
+// load html fragments
+// this uses node's fs library, so it only runs at compile time
+var fragments = {
+    test: fs.readFileSync("src/html/test.html", "utf8"),
+    controlbar: fs.readFileSync("src/html/controlbar.html", "utf8"),
+    splashpage: fs.readFileSync("src/html/splash.html", "utf8"),
+    spinner: fs.readFileSync("src/html/spinner.html", "utf8")
+}
+
+console.log(fragments);
 
 //const slidey = {
 //    run: () => { this.setup(); console.log("slide!")},
