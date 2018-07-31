@@ -118,6 +118,7 @@ slidey.prototype = {
             // then add it as the id
             var slideID = slideIndexToID(index);
             section.setAttribute("id", slideID);
+            section.style.background = section.dataset.background;
 
             // hide all but current slide
             if (index == this.currentSlide) {
