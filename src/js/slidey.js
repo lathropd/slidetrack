@@ -4,8 +4,11 @@ import "web-animations-js";
 import page from "../../lib/page.js/page";
 import "../sass/slideyslides.scss";
 import "../../lib/animatelo/dist/animatelo.min";
+import templates from "./templates.js";
+
 const _ = require("lodash");
 const fs = require("fs");
+
 
 const PLAYER_CLASS = "slidey"; // goes on body to activate the page
 const SLIDESET_CLASS = "slides";
@@ -18,6 +21,8 @@ const SLIDE_IN_RIGHT = animatelo.fadeInRight;
 const SLIDE_OUT_LEFT = animatelo.fadeOutLeft;
 const SLIDE_OUT_RIGHT = animatelo.fadeOutRight;
 
+//import test from "../html/test.yaml";
+//console.log("yaml test", test);
 
 // load html fragments
 // this uses node's fs library, so it only runs at compile time
@@ -25,11 +30,24 @@ var fragments = {
     test: fs.readFileSync("src/html/test.html", "utf8"),
     controlbar: fs.readFileSync("src/html/controlbar.html", "utf8"),
     splashpage: fs.readFileSync("src/html/splash.html", "utf8"),
-    spinner: fs.readFileSync("src/html/spinner.html", "utf8")
+    spinner: fs.readFileSync("src/html/spinner.html", "utf8"),
+    spinner: fs.readFileSync("src/html/spinner.html", "utf8"),
+    slidesTest: fs.readFileSync("src/html/test.slides", "utf8"),
 }
 
-console.log(fragments);
+console.log("fragments", fragments);
 
+
+//fs.readdir("/")
+
+//console.log(fragments);
+//
+//var newslides = slidesDataParse(fragments.slidesTest);
+//console.log(newslides);
+//var newsections = slideDataToSections(newslides);
+//console.log(newsections);
+//var ss = document.querySelector(".slides");
+//newsections.forEach((section) => {ss.appendChild(section)});
 //const slidey = {
 //    run: () => { this.setup(); console.log("slide!")},
 //    next: () => console.log("next slide"),
@@ -75,14 +93,17 @@ var slidey = function (params) {
 
     console.log("setup slidey slides");
 
-    /*  if a parent container isn't defined, use the parent of the first
-        <section>. if it's a string, use that as a selector. otherwise assume
-        that it's an element. */
+    /*  if a parent container isn't defined use  the default player class */
     if (!this.parentContainer) { // any falsy value
-        this.parentContainer = document.querySelector("section").parentElement;
-    } else if (typeof (this.parentContainer) == "string") {
+        this.parentContainer = "."+SLIDESET_CLASS;
+    }
+
+    if (typeof this.parentContainer=="string") {
         this.parentContainer = document.querySelector(this.parentContainer)
     }
+
+
+
 
     /* TODO: CREATE A DIV INSIDE THE SLIDEY THAT JUST CONTAINS THE SECTIONS */
     //add the slideshow class to the parent container
@@ -191,8 +212,14 @@ slidey.prototype = {
 
 
     load: function (source) {
+        // if it's from an element get its inner HTML then delete the element
+        // otherwise try to pull it from a url
         if (source[0] == "#") {
-            console.log("parse from div");
+            var slidesText = document.querySelector(source).innerHTML;
+            var slidesData = slidesDataParse(slidesText);
+            var slideSections = slideDataToSections(slidesData);
+            this.parentContainer.innerHTML = "";
+            slideSections.forEach((slide) => this.parentContainer.append(slide));
         } else {
             console.log("load and parse from url");
         }
@@ -225,3 +252,48 @@ function slideIndexToID(index) {
 module.exports = slidey;
 
 window.slideIndexToID = slideIndexToID;
+
+
+function slidesDataParse(slidesText) {
+    var slideDataLines = slidesText.split("\n");
+    var slides = [];
+    var currentObject = {_content:[]};
+    var text = "";
+    var dataRegex = /^([a-z][a-z ]*):(.*)/ // regex for yaml-style key/value
+
+    while (slideDataLines.length > 0) {
+       var currentLine = slideDataLines.shift();
+        if (currentLine == "---") {
+            slides.push(currentObject);
+            currentObject = {_content:[]};
+            continue;
+        }
+        var data = dataRegex.exec(currentLine);
+        if (data) {
+            var key = data[1].trim().replace(/\s/g,"_");
+            currentObject[key] = data[2].trim();
+        } else {
+            console.log(currentObject);
+            currentObject._content.push(currentLine);
+        }
+
+    }
+    slides.push(currentObject);
+    return slides
+}
+
+
+function slideDataToSections(slideData) {
+    var sections = slideData.map((slide) => {
+        var section = document.createElement("section");
+        section.innerHTML = slide._content.join("<br>");
+        delete(slide._content);
+        var keys = Object.keys(slide);
+        console.log("keys",keys);
+        keys.forEach(function (key) {
+            section.dataset[key] = slide[key];
+        })
+        return section;
+    })
+    return sections;
+}

@@ -3,6 +3,7 @@ const slidey = require("./src/js/slidey.js")
 
 
 var slideshow = new slidey({});
+console.log(slideshow.parentContainer);
 
 console.log(slidey);
 console.log(slideshow);
@@ -21,9 +22,9 @@ console.log(slideshow);
 
 console.log("slidey");
 
+slideshow.load("#slidecode");
 
 slideshow.run();
-slideshow.load("");
 
 setTimeout(() =>slideshow.next(), 1000);
 setTimeout(() =>slideshow.next(), 3000);
