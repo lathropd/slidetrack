@@ -47,6 +47,7 @@ var slidey = function (params) {
 
     // slideshow startup settings
     this.currentSlide = params.currentSlide||0;
+    this.currentIndex = params.index||null;
     this.nextSlide = params.nextSlide||1;
     this.prevSlide = params.prevSlide||null;
     this.totalSlides = null; // this will get overwritten anyway
@@ -130,22 +131,28 @@ slidey.prototype = {
 
         this.parentContainer.addEventListener;
 
+        // if currentSlide is a valid slide, use that
+        // if not first look for this.currentIndex
         // if called on string selector, number, invaliud element, etc.
         // try various methods to get a slide followed by defaulting to the first
-        if (this.slides.includes(this.currentSlide) == false) {
-            if (typeof(this.currentSlide)=="string") {
+        if (this.slides.includes(this.currentSlide)) {
+            this.currentIndex = this.slides.find(this.currentSlide);
+        } else {
+            if (this.currentIndex) {
+                this.currentSlide = this.slides[currentIndex];
+            } else if (typeof(this.currentSlide)=="string") {
                 this.currentSlide = document.querySelector(this.currentSlide);
             }  else if (typeof(this.currentSlide)=="number") {
                 this.currentSlide = this.slides[Math.round(this.currentSlide)];
             }
-            if (this.slides.includes(this.currentSlide) == false) {
-                this.currentSlide = this.slides[0];
-            }
         }
 
-
-
-
+        if (this.slides.includes(this.currentSlide) ) {
+            this.currentIndex = this.slides.find(this.currentSlide);
+        } else {
+            this.currentIndex = 0;
+            this.currentSlide = this.slides[0];
+        }
         this.parentContainer.append(this.currentSlide);
     },
 
@@ -170,36 +177,13 @@ slidey.prototype = {
         this.goto(this.currentSlide - 1);
     },
 
-    goto: function (newSlide) {
+    goto: function (newIndex) {
         var oldSlide = this.currentSlide;
-
-        if (newSlide >= 0 & newSlide < this.totalSlides) {
-            // change current slide indices
-            this.currentSlide = newSlide;
-            this.prevSlide = newSlide - 1;
-            this.nextSlide = newSlide + 1;
-
-            // null out invalid slide indices
-            if (this.prevSlide < 0) this.prevSlide = null;
-            if (this.nextSlide < this.totalSlides) this.nextSlide = null;
-
-            // determine direction
-            if (oldSlide < newSlide) {
-                // slide out to the left and in from the right
-                this.slideOutLeft("#"+slideIndexToID(oldSlide));
-                this.slideInRight("#"+slideIndexToID(newSlide));
-
-            }  else if (oldSlide > newSlide) {
-
-                // slide out to the right and in from the lefy
-                this.slideOutRight("#"+slideIndexToID(oldSlide));
-                this.slideInLeft("#"+slideIndexToID(newSlide));
-
-            } else {
-
-                // null op, means we're staying put
-                console.log(`(goto)  index the same, staying at slide ${this.currentSlide}`);
-            }
+        var newSlide = this.slides[newIndex];
+        if (this.slides.includes(newSlide)) {
+            this.parentContainer.replaceChild(newSlide, this.currentSlide)
+            this.currentSlide = newSlde;
+            this.currentIndex = newIndex;
 
         } else {
             console.log(`(goto) invalid index, staying at slide ${this.currentSlide}`);
