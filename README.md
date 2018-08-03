@@ -30,3 +30,8 @@ It's based heavily on a storyboard metaphor and inspred heavily by [reveal.js](h
 
 - [Mozilla documentation on keeping load times fast](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Author_fast-loading_HTML_pages)
 - [Brief, not great explanation of why a file should ideally be 14kb or less](https://tylercipriani.com/blog/2016/09/25/the-14kb-in-the-tcp-initial-window/)
+
+
+## Zepto/jQuery
+
+Looked at them. Parcel bundles them in and does a worse job with minification. Put Zepto in `./lib` as a potential dependency where I can build just the things I want. But... Probably can avoid it.
