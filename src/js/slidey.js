@@ -1,14 +1,8 @@
 "use strict"
 
-import "web-animations-js";
-import page from "../../lib/page.js/page";
 import "../sass/slideyslides.scss";
-import "../../lib/animatelo/dist/animatelo.min";
-import templates from "./templates.js";
 
 const _ = require("lodash");
-const fs = require("fs");
-
 
 
 const PLAYER_CLASS = "slidey"; // goes on body to activate the page
@@ -16,17 +10,20 @@ const SLIDESET_CLASS = "slides";
 const SLIDE_ID_PREFIX = "slide-";
 const SLIDE_INDEX_DIGITS = 3;
 const SLIDE_STARTUP_FADE_TIME = 2000;
-const FADE_IN = animatelo.fadeIn;
-const SLIDE_IN_LEFT = animatelo.fadeInLeft;
-const SLIDE_IN_RIGHT = animatelo.fadeInRight;
-const SLIDE_OUT_LEFT = animatelo.fadeOutLeft;
-const SLIDE_OUT_RIGHT = animatelo.fadeOutRight;
+
+// taking animatelo dependency out, so these are non-working for now
+//const FADE_IN = animatelo.fadeIn;
+//const SLIDE_IN_LEFT = animatelo.fadeInLeft;
+//const SLIDE_IN_RIGHT = animatelo.fadeInRight;
+//const SLIDE_OUT_LEFT = animatelo.fadeOutLeft;
+//const SLIDE_OUT_RIGHT = animatelo.fadeOutRight;
 
 //import test from "../html/test.yaml";
 //console.log("yaml test", test);
 
 // load html fragments
 // this uses node's fs library, so it only runs at compile time
+const fs = require("fs");
 var fragments = {
     test: fs.readFileSync("src/html/test.html", "utf8"),
     controlbar: fs.readFileSync("src/html/controlbar.html", "utf8"),
@@ -35,30 +32,6 @@ var fragments = {
     spinner: fs.readFileSync("src/html/spinner.html", "utf8"),
     slidesTest: fs.readFileSync("src/html/test.slides", "utf8"),
 }
-
-console.log("fragments", fragments);
-
-
-//fs.readdir("/")
-
-//console.log(fragments);
-//
-//var newslides = slidesDataParse(fragments.slidesTest);
-//console.log(newslides);
-//var newsections = slideDataToSections(newslides);
-//console.log(newsections);
-//var ss = document.querySelector(".slides");
-//newsections.forEach((section) => {ss.appendChild(section)});
-//const slidey = {
-//    run: () => { this.setup(); console.log("slide!")},
-//    next: () => console.log("next slide"),
-//    prev: () => console.log("previous slide"),
-//    goTo: (slideNum) => console.log("go to slide " + slideNum),
-//    setup: () => console.log("build the dom structure is needed, bind needed elements")
-//
-//}
-
-
 
 // TODO: Add a loading spinner like these https://loading.io/css/?
 
@@ -85,11 +58,13 @@ var slidey = function (params) {
 
     // Transitions related settingd
     this.startupFadeInTime = params.startupFadeInTime||SLIDE_STARTUP_FADE_TIME;
-    this.fadeIn = params.fadeIn || FADE_IN;
-    this.slideInLeft = params.slideInLeft||SLIDE_IN_LEFT;
-    this.slideInRight = params.slideInRight||SLIDE_IN_RIGHT;
-    this.slideOutLeft = params.slideOutLeft||SLIDE_OUT_RIGHT;
-    this.slideOutRight = params.slideOutRight||SLIDE_OUT_RIGHT;
+    this.fadeIn = this.parentContainer.replaceChild;
+    this.slideInLeft = this.parentContainer.replaceChild;
+    this.slideInRight = this.parentContainer.replaceChild;
+
+    // using Node.replaceChild() means the slideout functions won't get separate calls
+    // this.slideOutLeft = params.slideOutLeft||SLIDE_OUT_RIGHT;
+    // this.slideOutRight = params.slideOutRight||SLIDE_OUT_RIGHT;
 
 
     console.log("setup slidey slides");
@@ -134,7 +109,8 @@ slidey.prototype = {
         // give them ids
         // TODO: deal with nested sections
         this.totalSlides = sections.length;
-        sections.forEach((section, index) => {
+        this.slides = Array.from(sections);
+        this.slides.forEach((section, index) => {
 
             // generate id including 0-padded, 0-base index
             // then add it as the id
@@ -148,10 +124,29 @@ slidey.prototype = {
             } else {
                 "";
             }
+            this.parentContainer.removeChild(section); // pull it from the DOM
+
         });
 
-        FADE_IN("#"+slideIndexToID(this.currentSlide), {duration: this.startupFadeInTime});
+        this.parentContainer.addEventListener;
 
+        // if called on string selector, number, invaliud element, etc.
+        // try various methods to get a slide followed by defaulting to the first
+        if (this.slides.includes(this.currentSlide) == false) {
+            if (typeof(this.currentSlide)=="string") {
+                this.currentSlide = document.querySelector(this.currentSlide);
+            }  else if (typeof(this.currentSlide)=="number") {
+                this.currentSlide = this.slides[Math.round(this.currentSlide)];
+            }
+            if (this.slides.includes(this.currentSlide) == false) {
+                this.currentSlide = this.slides[0];
+            }
+        }
+
+
+
+
+        this.parentContainer.append(this.currentSlide);
     },
 
 
