@@ -181,8 +181,8 @@ slidey.prototype = {
         var oldSlide = this.currentSlide;
         var newSlide = this.slides[newIndex];
         if (this.slides.includes(newSlide)) {
-            this.parentContainer.replaceChild(newSlide, this.currentSlide)
-            this.currentSlide = newSlde;
+            this.fadeIn(newSlide, this.currentSlide);
+            this.currentSlide = newSlide;
             this.currentIndex = newIndex;
 
         } else {
