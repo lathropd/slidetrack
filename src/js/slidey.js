@@ -166,15 +166,15 @@ slidey.prototype = {
     },
 
     next: function () {
-        console.log(`(next) current slide is ${this.currentSlide}`);
-        console.log(`(next) try go to slide ${this.currentSlide + 1}`);
+        console.log(`(next) current slide is ${this.currentIndex}`);
+        console.log(`(next) try go to slide ${this.currentIndex + 1}`);
         this.goto(this.currentSlide + 1);
     },
 
     prev: function () {
-        console.log(`(prev) current slide is ${this.currentSlide}`);
-        console.log(`(prev) try go to slide ${this.currentSlide - 1}`);
-        this.goto(this.currentSlide - 1);
+        console.log(`(prev) current slide is ${this.currentIndex}`);
+        console.log(`(prev) try go to slide ${this.currentIndex - 1}`);
+        this.goto(this.currentIndex - 1);
     },
 
     goto: function (newIndex) {
