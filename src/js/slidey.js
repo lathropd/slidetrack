@@ -1,6 +1,18 @@
 "use strict"
 
-import "../sass/slideyslides.scss";
+import classes from "../sass/slideyslides.scss";
+import showdown from "showdown";
+
+var converter = new showdown.Converter({
+    parseImgDimensions: true,
+    simplifiedAutoLink: true,
+    excludeTrailingPunctuationFromURLs: true,
+    tables: true,
+    simpleLineBreaks: true,
+    openLinksInNewWindow: true,
+});
+
+console.log(classes);
 
 const _ = require("lodash");
 
@@ -9,14 +21,57 @@ const PLAYER_CLASS = "slidey"; // goes on body to activate the page
 const SLIDESET_CLASS = "slides";
 const SLIDE_ID_PREFIX = "slide-";
 const SLIDE_INDEX_DIGITS = 3;
-const SLIDE_STARTUP_FADE_TIME = 2000;
+const SLIDE_TRANSITION_TIME = 500;
+const SLIDE_TRANSITION_CONFIG = {
+    duration: SLIDE_TRANSITION_TIME,
+    easing: "ease-out",
+
+}
 
 // taking animatelo dependency out, so these are non-working for now
-//const FADE_IN = animatelo.fadeIn;
-//const SLIDE_IN_LEFT = animatelo.fadeInLeft;
-//const SLIDE_IN_RIGHT = animatelo.fadeInRight;
-//const SLIDE_OUT_LEFT = animatelo.fadeOutLeft;
-//const SLIDE_OUT_RIGHT = animatelo.fadeOutRight;
+const ANIMATE_IN = function (element, parent) {
+    parent.append(element);
+    element.classList
+
+}
+
+const ANIMATE_OUT =  function (element, parent) {
+    var a = element.animate([{opacity: 1},{opacity: 0}], SLIDE_TRANSITION_CONFIG)
+    a.onfinish = () => parent.removeChild(element);
+//    parent.removeChild(element);
+
+
+}
+
+// increasing index
+const ANIMATE_IN_BW =  function (element, parent) {
+    parent.append(element);
+    element.animate([{left: "-100%"},{left: 0}], SLIDE_TRANSITION_CONFIG)
+
+}
+
+// decreasing index
+const ANIMATE_IN_FW =  function (element, parent) {
+    parent.append(element);
+    element.animate([{left: "100%"},{left: 0}], SLIDE_TRANSITION_CONFIG)
+
+
+}
+
+// increasing index
+const ANIMATE_OUT_BW =  function (element, parent) {
+    var a = element.animate([{left: 0},{ left: "100%"}], SLIDE_TRANSITION_CONFIG)
+    a.onfinish = () => parent.removeChild(element);
+//    parent.removeChild(element);
+
+}
+
+// decreasing index
+const ANIMATE_OUT_FW =  function (element, parent) {
+    var a = element.animate([{left: 0},{ left: "-100%"}], SLIDE_TRANSITION_CONFIG)
+    a.onfinish = () => parent.removeChild(element);
+
+}
 
 //import test from "../html/test.yaml";
 //console.log("yaml test", test);
@@ -58,7 +113,7 @@ var slidey = function (params) {
 
 
     // Transitions related settingd
-    this.startupFadeInTime = params.startupFadeInTime||SLIDE_STARTUP_FADE_TIME;
+//    this.startupFadeInTime = params.startupFadeInTime||SLIDE_STARTUP_FADE_TIME;
     this.fadeIn = this.parentContainer.replaceChild;
     this.slideInLeft = this.parentContainer.replaceChild;
     this.slideInRight = this.parentContainer.replaceChild;
@@ -118,13 +173,14 @@ slidey.prototype = {
             var slideID = slideIndexToID(index);
             section.setAttribute("id", slideID);
             section.style.background = section.dataset.background;
+            section.style.opacity = 1;
 
-            // hide all but current slide
-            if (index == this.currentSlide) {
-//                section.classList.add("current");
-            } else {
-                "";
-            }
+//            // hide all but current slide
+//            if (index == this.currentSlide) {
+////                section.classList.add("current");
+//            } else {
+//                "";
+//            }
             this.parentContainer.removeChild(section); // pull it from the DOM
 
         });
@@ -135,24 +191,27 @@ slidey.prototype = {
         // if not first look for this.currentIndex
         // if called on string selector, number, invaliud element, etc.
         // try various methods to get a slide followed by defaulting to the first
-        if (this.slides.includes(this.currentSlide)) {
-            this.currentIndex = this.slides.find(this.currentSlide);
-        } else {
-            if (this.currentIndex) {
-                this.currentSlide = this.slides[currentIndex];
-            } else if (typeof(this.currentSlide)=="string") {
-                this.currentSlide = document.querySelector(this.currentSlide);
-            }  else if (typeof(this.currentSlide)=="number") {
-                this.currentSlide = this.slides[Math.round(this.currentSlide)];
-            }
-        }
-
-        if (this.slides.includes(this.currentSlide) ) {
-            this.currentIndex = this.slides.find(this.currentSlide);
-        } else {
-            this.currentIndex = 0;
-            this.currentSlide = this.slides[0];
-        }
+//        if (this.slides.includes(this.currentSlide)) {
+//            this.currentIndex = this.slides.find(this.currentSlide);
+//        } else {
+//            if (this.currentIndex) {
+//                this.currentSlide = this.slides[currentIndex];
+//            } else if (typeof(this.currentSlide)=="string") {
+//                this.currentSlide = document.querySelector(this.currentSlide);
+//            }  else if (typeof(this.currentSlide)=="number") {
+//                this.currentSlide = this.slides[Math.round(this.currentSlide)];
+//            }
+//        }
+//
+//        if (this.slides.includes(this.currentSlide)) {
+//            this.currentIndex = this.slides.find(this.currentSlide);
+//        } else {
+//            this.currentIndex = 0;
+//            this.currentSlide = this.slides[0];
+//        }
+//
+        this.currentIndex = 0;
+        this.currentSlide = this.slides[0];
         this.parentContainer.append(this.currentSlide);
     },
 
@@ -168,7 +227,7 @@ slidey.prototype = {
     next: function () {
         console.log(`(next) current slide is ${this.currentIndex}`);
         console.log(`(next) try go to slide ${this.currentIndex + 1}`);
-        this.goto(this.currentSlide + 1);
+        this.goto(this.currentIndex + 1);
     },
 
     prev: function () {
@@ -178,15 +237,26 @@ slidey.prototype = {
     },
 
     goto: function (newIndex) {
-        var oldSlide = this.currentSlide;
         var newSlide = this.slides[newIndex];
-        if (this.slides.includes(newSlide)) {
-            this.fadeIn(newSlide, this.currentSlide);
+        var oldSlide = this.currentSlide;
+        var oldIndex = this.currentIndex;
+        if (newSlide != oldSlide & this.slides.includes(newSlide) ) {
+            console.log(`(goto) ${newIndex}`);
+            if (newIndex > oldIndex) {
+                ANIMATE_IN_FW(newSlide, this.parentContainer);
+                ANIMATE_OUT_FW(oldSlide, this.parentContainer);
+            } else if (newIndex < oldIndex) {
+                ANIMATE_IN_BW(newSlide, this.parentContainer);
+                ANIMATE_OUT_BW(oldSlide, this.parentContainer);
+            } else {
+                ANIMATE_IN(newSlide, this.parentContainer);
+                ANIMATE_OUT(oldSlide, this.parentContainer);
+            }
             this.currentSlide = newSlide;
             this.currentIndex = newIndex;
 
         } else {
-            console.log(`(goto) invalid index, staying at slide ${this.currentSlide}`);
+            console.log(`(goto) invalid or same index, staying at slide ${this.currentIndex}`);
         }
     },
 
@@ -239,7 +309,7 @@ function slidesDataParse(slidesText) {
     var slides = [];
     var currentObject = {_content:[]};
     var text = "";
-    var dataRegex = /^([a-z][a-z ]*):(.*)/ // regex for yaml-style key/value
+    var dataRegex = /^([a-z][a-z ]*): (.*)/ // regex for yaml-style key/value
 
     while (slideDataLines.length > 0) {
        var currentLine = slideDataLines.shift();
@@ -266,7 +336,12 @@ function slidesDataParse(slidesText) {
 function slideDataToSections(slideData) {
     var sections = slideData.map((slide) => {
         var section = document.createElement("section");
-        section.innerHTML = slide._content.join("<br>");
+        var content = slide._content.join("\n");
+        if (section.dataset.raw == true) {
+            section.innerHTML = content;
+        } else {
+            section.innerHTML = converter.makeHtml(content);
+        }
         delete(slide._content);
         var keys = Object.keys(slide);
         console.log("keys",keys);

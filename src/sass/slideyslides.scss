@@ -1,4 +1,4 @@
-@import "../../lib/sass/bourbon/bourbon";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/6.0.0/sanitize.min.css");
 
 
 /*********************************************
@@ -49,6 +49,7 @@ body {
         height: 100%;
         padding: 0px;
         min-height: 0 !important;
+        background-color: whitesmoke;
 
     }
 
@@ -62,6 +63,7 @@ body {
         opacity: 0;
         text-align: center;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         box-orient: vertical;
@@ -94,4 +96,14 @@ body {
  * Transitions setups
  *********************************************/
 
+
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+
+.slides section {
+//  animation:         fadeIn 5s 1;
+}
 
