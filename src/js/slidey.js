@@ -109,6 +109,7 @@ var slidey = function (params) {
     this.slideTimings = params.slideTimings||[0.0,5.2,6.5];
     this.timed = params.timed || false;
     this.audio = params.audio || false;
+    this.plugins = params.plugins || [];
 
 
 
@@ -170,10 +171,14 @@ slidey.prototype = {
 
             // generate id including 0-padded, 0-base index
             // then add it as the id
+
             var slideID = slideIndexToID(index);
             section.setAttribute("id", slideID);
+            this.plugins.forEach((plugin) => plugin(section)); // run all the plugins on it
             section.style.background = section.dataset.background;
-            section.style.opacity = 1;
+
+            this.parentContainer.removeChild(section); // pull it from the DOM
+            section.style.opacity = 1; // make it visible
 
 //            // hide all but current slide
 //            if (index == this.currentSlide) {
@@ -181,7 +186,6 @@ slidey.prototype = {
 //            } else {
 //                "";
 //            }
-            this.parentContainer.removeChild(section); // pull it from the DOM
 
         });
 
@@ -310,7 +314,8 @@ function slidesDataParse(slidesText) {
     var currentObject = {_content:[]};
     var text = "";
     var dataRegex = /^([a-z][a-z ]*): (.*)/ // regex for yaml-style key/value
-
+    var urlRegex = /^https?:\/\/\S+$/; // via http://urlregex.com/
+    var supportedImageTypes = ['jpg','jpeg','png','gif','tif','tiff'];
     while (slideDataLines.length > 0) {
        var currentLine = slideDataLines.shift();
         if (currentLine == "---") {
@@ -319,14 +324,21 @@ function slidesDataParse(slidesText) {
             continue;
         }
         var data = dataRegex.exec(currentLine);
+        var currentLineTrimmed = currentLine.trim()
+        var url = urlRegex.exec(currentLineTrimmed);
         if (data) {
             var key = data[1].trim().replace(/\s/g,"_");
             currentObject[key] = data[2].trim();
-        } else {
+        } else if (url) {
+            if (supportedImageTypes.includes(currentLineTrimmed.split("\.").slice(-1))) {
+                currentObject._content.push(`<img src="${currentLineTrimmed}">`);
+            } else {
+                currentObject._content.push(`<div class="embed"><a href="${currentLineTrimmed}" class="embed">${currentLineTrimmed}</a></div>`);
+            }
             console.log(currentObject);
+        } else {
             currentObject._content.push(currentLine);
         }
-
     }
     slides.push(currentObject);
     return slides
