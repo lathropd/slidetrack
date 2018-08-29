@@ -49,7 +49,7 @@ slideshow.run();
 //setTimeout(() => slideshow.goto(4), 24000);
 //setTimeout(() => slideshow.goto(1), 28000);
 
-slideshow.pause();
+//slideshow.pause();
 
 
 ;
@@ -61,7 +61,7 @@ console.log(slidey);
 
 window.slideshow = slideshow;
 window.slidey = slidey;
-window.embedza = new Embedza();
+//window.embedza = new Embedza();
 
 
 module.exports = {
