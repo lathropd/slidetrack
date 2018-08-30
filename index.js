@@ -38,7 +38,9 @@ slideshow.load("#slidecode");
 
 slideshow.run();
 
-//setTimeout(() =>slideshow.next(), 1000);
+setTimeout(() =>slideshow.next(), 1000);
+setTimeout(() =>slideshow.prev(), 2000);
+
 //setTimeout(() =>slideshow.next(), 3000);
 //setTimeout(() =>slideshow.next(), 6000);
 //setTimeout(() =>slideshow.prev(), 8500);

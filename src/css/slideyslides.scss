@@ -4,6 +4,7 @@
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
+
 html,
 body {
   width: 100%;
@@ -37,6 +38,10 @@ body {
         section {
             display: none;
 
+            @import "themes/main";
+
+
+
         }
 
 
@@ -45,8 +50,7 @@ body {
             text-align: center;
         }
 
-
-
+    }
 }
 
 
