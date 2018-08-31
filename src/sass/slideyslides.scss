@@ -74,6 +74,9 @@ body {
         opacity: 0;
 
 
+        @import "themes/main";
+
+
         div.embed {
             width: 100%;
             min-height: 100px;
@@ -126,3 +129,48 @@ body {
 //  animation:         fadeIn 5s 1;
 }
 
+
+
+/*********************************************
+ * Setup rem based on window size
+ *********************************************/
+
+@media only screen {
+    html {
+        font-size: 4vw; /* 24 characters across in fixed-width */
+    }
+
+    section {
+        max-height: 13.5rem;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 10px;
+        margin-top: 10px;
+
+
+    }
+}
+
+/* for print our standard size will be 24 point/px */
+/* definitely will be a work in progress for a while */
+@media  only print {
+    html {
+//        font-size: 24px;
+        font-size: 4vw;
+
+    }
+
+    section {
+
+        border: 1px solid black;
+        max-height: 13.5rem;
+        max-width: 24rem;
+        padding: 0.5 rem;
+        margin: auto;
+        display: block;
+        opacity: 1.0;
+    }
+
+
+
+}
