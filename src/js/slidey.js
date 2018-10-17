@@ -30,14 +30,16 @@ const SLIDE_TRANSITION_CONFIG = {
 
 // taking animatelo dependency out, so these are non-working for now
 const ANIMATE_IN = function (element, parent) {
-    parent.append(element);
+    var a = element.animate([{opacity: 0},{opacity: 1}], SLIDE_TRANSITION_CONFIG)
+    a.onfinish = () => {element.style.opacity = 1.0; element.style.zIndex = 1000;}
+
     element.classList
 
 }
 
 const ANIMATE_OUT =  function (element, parent) {
     var a = element.animate([{opacity: 1},{opacity: 0}], SLIDE_TRANSITION_CONFIG)
-    a.onfinish = () => parent.removeChild(element);
+    a.onfinish = () => {element.style.opacity = 0.0; element.style.zIndex = -1000;}
 //    parent.removeChild(element);
 
 
@@ -45,15 +47,16 @@ const ANIMATE_OUT =  function (element, parent) {
 
 // increasing index
 const ANIMATE_IN_BW =  function (element, parent) {
-    parent.append(element);
-    element.animate([{left: "-100%"},{left: 0}], SLIDE_TRANSITION_CONFIG)
+    var a = element.animate([{left: "-100%", opacity: 1.0},{left: 0, opacity: 1.0}], SLIDE_TRANSITION_CONFIG)
+    a.onfinish = () => {element.style.opacity = 1.0; element.style.zIndex = 1000;}
+
 
 }
 
 // decreasing index
 const ANIMATE_IN_FW =  function (element, parent) {
-    parent.append(element);
-    element.animate([{left: "100%"},{left: 0}], SLIDE_TRANSITION_CONFIG)
+    var a = element.animate([{left: "100%", opacity: 1.0},{left: 0, opacity: 1.0}], SLIDE_TRANSITION_CONFIG)
+    a.onfinish = () => {element.style.opacity = 1.0; element.style.zIndex = 1000;}
 
 
 }
@@ -61,7 +64,7 @@ const ANIMATE_IN_FW =  function (element, parent) {
 // increasing index
 const ANIMATE_OUT_BW =  function (element, parent) {
     var a = element.animate([{left: 0},{ left: "100%"}], SLIDE_TRANSITION_CONFIG)
-    a.onfinish = () => parent.removeChild(element);
+    a.onfinish = () => {element.style.opacity = 0.0; element.style.zIndex = -1000;}
 //    parent.removeChild(element);
 
 }
@@ -69,7 +72,7 @@ const ANIMATE_OUT_BW =  function (element, parent) {
 // decreasing index
 const ANIMATE_OUT_FW =  function (element, parent) {
     var a = element.animate([{left: 0},{ left: "-100%"}], SLIDE_TRANSITION_CONFIG)
-    a.onfinish = () => parent.removeChild(element);
+    a.onfinish = () => {element.style.opacity = 0.0; element.style.zIndex = -1000;}
 
 }
 
@@ -177,8 +180,8 @@ slidey.prototype = {
             this.plugins.forEach((plugin) => plugin(section)); // run all the plugins on it
             section.style.background = section.dataset.background;
 
-            this.parentContainer.removeChild(section); // pull it from the DOM
-            section.style.opacity = 1; // make it visible
+//            this.parentContainer.removeChild(section); // pull it from the DOM
+            section.style.opacity = 0; // make it invisible
 
 //            // hide all but current slide
 //            if (index == this.currentSlide) {
