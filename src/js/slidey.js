@@ -311,39 +311,18 @@ module.exports = slidey;
 window.slideIndexToID = slideIndexToID;
 
 
+
+
 function slidesDataParse(slidesText) {
-    var slideDataLines = slidesText.split("\n");
+    const slideSep = /^\*\*\*+$/m;
+    var slideDataPages = slidesText.split(slideSep);
     var slides = [];
     var currentObject = {_content:[]};
     var text = "";
     var dataRegex = /^([a-z][a-z ]*): (.*)/ // regex for yaml-style key/value
     var urlRegex = /^https?:\/\/\S+$/; // via http://urlregex.com/
     var supportedImageTypes = ['jpg','jpeg','png','gif','tif','tiff'];
-    while (slideDataLines.length > 0) {
-       var currentLine = slideDataLines.shift();
-        if (currentLine == "---") {
-            slides.push(currentObject);
-            currentObject = {_content:[]};
-            continue;
-        }
-        var data = dataRegex.exec(currentLine);
-        var currentLineTrimmed = currentLine.trim()
-        var url = urlRegex.exec(currentLineTrimmed);
-        if (data) {
-            var key = data[1].trim().replace(/\s/g,"_");
-            currentObject[key] = data[2].trim();
-        } else if (url) {
-            if (supportedImageTypes.includes(currentLineTrimmed.split("\.").slice(-1))) {
-                currentObject._content.push(`<img src="${currentLineTrimmed}">`);
-            } else {
-                currentObject._content.push(`<div class="embed"><a href="${currentLineTrimmed}" class="embed">${currentLineTrimmed}</a></div>`);
-            }
-            console.log(currentObject);
-        } else {
-            currentObject._content.push(currentLine);
-        }
-    }
-    slides.push(currentObject);
+    slideDataPages.forEach((d) => slides.push(d));
     return slides
 }
 
@@ -351,18 +330,12 @@ function slidesDataParse(slidesText) {
 function slideDataToSections(slideData) {
     var sections = slideData.map((slide) => {
         var section = document.createElement("section");
-        var content = slide._content.join("\n");
+        var content = slide;
         if (section.dataset.raw == true) {
             section.innerHTML = content;
         } else {
             section.innerHTML = converter.makeHtml(content);
         }
-        delete(slide._content);
-        var keys = Object.keys(slide);
-        console.log("keys",keys);
-        keys.forEach(function (key) {
-            section.dataset[key] = slide[key];
-        })
         return section;
     })
     return sections;
