@@ -1,7 +1,14 @@
-"use strict"
+"use strict";
 
-import classes from "../sass/slideyslides.scss";
+console.log("slidey.js 1")
+//import classes from "../sass/slideyslides.scss";
 import showdown from "showdown";
+import _ from "lodash";
+import fs from "fs";
+import  from "../sass/slideylides.scss!"
+
+
+
 
 var converter = new showdown.Converter({
     parseImgDimensions: true,
@@ -11,10 +18,7 @@ var converter = new showdown.Converter({
     simpleLineBreaks: true,
     openLinksInNewWindow: true,
 });
-
-console.log(classes);
-
-const _ = require("lodash");
+console.log("slidey.js 2")
 
 
 const PLAYER_CLASS = "slidey"; // goes on body to activate the page
@@ -27,6 +31,8 @@ const SLIDE_TRANSITION_CONFIG = {
     easing: "ease-out",
 
 }
+console.log("slidey.js 3")
+
 
 // taking animatelo dependency out, so these are non-working for now
 const ANIMATE_IN = function (element, parent) {
@@ -76,24 +82,27 @@ const ANIMATE_OUT_FW =  function (element, parent) {
 
 }
 
-//import test from "../html/test.yaml";
-//console.log("yaml test", test);
+console.log("slidey.js 4")
 
-// load html fragments
-// this uses node's fs library, so it only runs at compile time
-const fs = require("fs");
-var fragments = {
-    test: fs.readFileSync("src/html/test.html", "utf8"),
-    controlbar: fs.readFileSync("src/html/controlbar.html", "utf8"),
-    splashpage: fs.readFileSync("src/html/splash.html", "utf8"),
-    spinner: fs.readFileSync("src/html/spinner.html", "utf8"),
-    spinner: fs.readFileSync("src/html/spinner.html", "utf8"),
-    slidesTest: fs.readFileSync("src/html/test.slides", "utf8"),
-}
+
+//// load html fragments
+//// this uses node's fs library, so it only runs at compile time
+//var fragments = {
+//    test: fs.readFileSync("src/html/test.html", "utf8"),
+//    controlbar: fs.readFileSync("src/html/controlbar.html", "utf8"),
+//    splashpage: fs.readFileSync("src/html/splash.html", "utf8"),
+//    spinner: fs.readFileSync("src/html/spinner.html", "utf8"),
+//    spinner: fs.readFileSync("src/html/spinner.html", "utf8"),
+//    slidesTest: fs.readFileSync("src/html/test.slides", "utf8"),
+//}
+//
+//
+//console.log("slidey.js 5")
+
 
 // TODO: Add a loading spinner like these https://loading.io/css/?
 
-
+console.log("slidey.js slidey()");
 var slidey = function (params) {
     // mege the params into here
 
@@ -147,6 +156,10 @@ var slidey = function (params) {
     this.parentContainer.parentElement.classList.add(this.playerClass);
     this.go();
 }
+
+
+console.log("slidey.js slidey() proto");
+
 
 slidey.prototype = {
 
@@ -299,6 +312,9 @@ slidey.prototype = {
     }
 }
 
+console.log("slidey.js slidey() proto end");
+
+
 
 // this is in global scope for the module, but after compilation/etc. will be private to it
 function slideIndexToID(index) {
@@ -306,7 +322,6 @@ function slideIndexToID(index) {
     return slideID;
 }
 
-module.exports = slidey;
 
 window.slideIndexToID = slideIndexToID;
 
@@ -340,3 +355,11 @@ function slideDataToSections(slideData) {
     })
     return sections;
 }
+console.log("slidey.js end")
+
+
+export {slidey};
+//export const slidey = slidey;
+
+console.log("slidey.js exported")
+

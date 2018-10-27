@@ -1,20 +1,11 @@
 "use strict";
-const slidey = require("./src/js/slidey.js")
+import {slidey} from "slideyslides/src/js/slidey"; 
+
+console.log(slidey);
 
 
-function iframelyPlugin(slide) {
-    var links = slide.querySelectorAll("a.embed");
-    links.forEach((link) => iframely.load(link));
-}
+var slideshow = new slidey({});
 
-
-function embedlyPlugin(slide) {
-   embedly('card', {selector: 'a.embed'});
-}
-
-var slideshow = new slidey({
-    plugins: [embedlyPlugin]
-});
 console.log(slideshow.parentContainer);
 
 console.log(slidey);
@@ -54,22 +45,7 @@ setTimeout(() =>slideshow.prev(), 2000);
 //slideshow.pause();
 
 
-;
-;
 
-
-
-console.log(slidey);
-
-window.slideshow = slideshow;
-window.slidey = slidey;
-//window.embedza = new Embedza();
-
-
-module.exports = {
-    slideshow: slideshow,
-    slidey: slidey,
-}
 
 
 

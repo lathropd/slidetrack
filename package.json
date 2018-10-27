@@ -1,43 +1,52 @@
 {
-  "name": "slideyslides",
-  "version": "0.0.0",
-  "description": "Tool for audio-based slide presentations optimized for news.",
-  "main": "index.js",
-  "directories": {
-    "example": "examples",
-    "test": "test"
-  },
-  "scripts": {
-    "test": "make test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lathropd/slideyslides.git"
-  },
-  "keywords": [
-    "slides",
-    "audio",
-    "news",
-    "presentations",
-    "storytelling"
-  ],
-  "author": "Daniel Lathrop <daniel.lathrop@gmail.com>",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/lathropd/slideyslides/issues"
-  },
-  "homepage": "https://github.com/lathropd/slideyslides#readme",
-  "devDependencies": {
-    "babel-polyfill": "^6.26.0",
-    "chai": "^4.1.2",
-    "easytimer.js": "git+https://github.com/lathropd/easytimer.js.git",
-    "lodash": "^4.17.10",
-    "mocha": "^5.2.0",
-    "node-sass": "^4.9.0",
-    "wavesurfer": "^1.3.4",
-    "web-animations-js": "^2.3.1"
-  },
-  "dependencies": {
-    "showdown": "^1.8.6"
-  }
+    "name": "slideyslides",
+    "version": "0.0.0",
+    "description": "Tool for audio-based slide presentations optimized for news.",
+    "main": "index.js",
+    "directories": {
+        "example": "examples",
+        "test": "test"
+    },
+    "scripts": {
+        "test": "make test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lathropd/slideyslides.git"
+    },
+    "keywords": [
+        "slides",
+        "audio",
+        "news",
+        "presentations",
+        "storytelling"
+    ],
+    "author": "Daniel Lathrop <daniel.lathrop@gmail.com>",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/lathropd/slideyslides/issues"
+    },
+    "homepage": "https://github.com/lathropd/slideyslides#readme",
+    "devDependencies": {
+        "babel-polyfill": "^6.26.0",
+        "chai": "^4.1.2",
+        "easytimer.js": "git+https://github.com/lathropd/easytimer.js.git",
+        "lodash": "^4.17.10",
+        "mocha": "^5.2.0",
+        "node-sass": "^4.9.0",
+        "showdown": "^1.8.6",
+        "steal": "^2.1.5",
+        "steal-sass": "git+https://github.com/lathropd/steal-sass.git",
+        "steal-tools": "^2.0.6",
+        "wavesurfer": "^1.3.4",
+        "web-animations-js": "^2.3.1"
+    },
+    "dependencies": {
+        "steal-css": "^1.3.2"
+    },
+    "steal": {
+        "paths": {
+            "slidey": "src/js/slidey.js"
+        }
+    }
 }
