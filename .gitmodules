@@ -1,9 +1,0 @@
-[submodule "lib/page.js"]
-	path = lib/page.js
-	url = https://github.com/visionmedia/page.js
-[submodule "lib/bideo.js"]
-	path = lib/bideo.js
-	url = https://github.com/rishabhp/bideo.js
-[submodule "lib/animatelo"]
-	path = lib/animatelo
-	url = https://github.com/gibbok/animatelo.git
