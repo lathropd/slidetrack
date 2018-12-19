@@ -1,5 +1,15 @@
-"use strict";
-import {slidey} from "slideyslides/src/js/slidey"; 
+"use strict"
+
+const marky = require('./lib/markymarkup')
+
+
+
+/*
+
+comment out to use VS Code's debugger 
+
+ const slidey = require("src/js/slidey.js")
+
 
 console.log(slidey);
 
@@ -45,7 +55,7 @@ setTimeout(() =>slideshow.prev(), 2000);
 //slideshow.pause();
 
 
-
+*/
 
 
 

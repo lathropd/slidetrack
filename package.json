@@ -4,8 +4,10 @@
     "description": "Tool for audio-based slide presentations optimized for news.",
     "main": "index.js",
     "directories": {
-        "example": "examples",
-        "test": "test"
+        "example": "./examples",
+        "lib": "./lib",
+        "src": "./src",
+        "test": "./test"
     },
     "scripts": {
         "test": "make test"
@@ -51,7 +53,8 @@
     },
     "steal": {
         "paths": {
-            "slidey": "src/js/slidey.js"
+            "slidey": "src/js/slidey.js",
+            "markymarkup": "lib/markymarkup.js"
         }
     }
 }
