@@ -1,0 +1,49 @@
+title: The happiest example
+subtitle:  Things I want to demonstrate
+
+***
+0:00
+
+<h1>HTML hed</h1>
+
+
+***
+(0:01:35)
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quam id leo in vitae. Mattis molestie a iaculis at erat pellentesque adipiscing commodo elit. Urna cursus eget nunc scelerisque viverra mauris in. Leo urna molestie at elementum eu facilisis sed. Quisque non tellus orci ac auctor augue mauris. Rhoncus mattis rhoncus urna neque viverra justo. Duis convallis convallis tellus id interdum velit. Sit amet luctus venenatis lectus magna fringilla urna porttitor. Et malesuada fames ac turpis egestas maecenas. Facilisi morbi tempus iaculis urna. Viverra mauris in aliquam sem fringilla ut morbi tincidunt.
+
+Tincidunt id aliquet risus feugiat in ante. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Nunc sed id semper risus in. Ut porttitor leo a diam sollicitudin tempor. Ut etiam sit amet nisl purus in. Arcu ac tortor dignissim convallis aenean et tortor at risus. Praesent tristique magna sit amet purus gravida. Mauris cursus mattis molestie a. At augue eget arcu dictum varius duis at consectetur. Imperdiet sed euismod nisi porta lorem mollis aliquam ut. Mauris cursus mattis molestie a iaculis. Lectus sit amet est placerat in. Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Nibh sed pulvinar proin gravida. Nibh tortor id aliquet lectus proin nibh nisl condimentum id. Lectus proin nibh nisl condimentum id.
+
+Odio facilisis mauris sit amet massa vitae tortor. Lacinia quis vel eros donec ac odio tempor orci dapibus. Eu turpis egestas pretium aenean pharetra magna ac placerat vestibulum. Non diam phasellus vestibulum lorem. Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Morbi tristique senectus et netus. Mattis aliquam faucibus purus in massa tempor nec. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Non consectetur a erat nam at lectus urna duis convallis. Massa massa ultricies mi quis hendrerit dolor magna eget est. Lorem donec massa sapien faucibus et molestie ac.
+***
+
+1:55
+hed:  Inline template hed
+dek:  purus viverra accumsan in nisl. 
+
+***
+
+3:30
+
+photo: images/somephoto.jpg
+tweet: https://twitter.com/pilhofer/status/1075533656393953280
+
+***
+
+(3:45)
+
+Commodo viverra maecenas accumsan lacus vel facilisis volutpat est velit. Morbi tristique senectus et netus et. Rhoncus urna neque viverra justo nec ultrices. Vitae sapien pellentesque habitant morbi. Justo eget magna fermentum iaculis. Sagittis nisl rhoncus mattis rhoncus urna. Vulputate ut pharetra sit amet aliquam id. Dis parturient montes nascetur ridiculus mus mauris vitae ultricies leo. Eget gravida cum sociis natoque penatibus et magnis. Commodo nulla facilisi nullam vehicula ipsum a arcu cursus. Velit egestas dui id ornare arcu odio. Aenean pharetra magna ac placerat vestibulum lectus mauris ultrices eros.
+
+Nulla pellentesque dignissim enim sit amet. Lacinia quis vel eros donec ac odio. Tellus cras adipiscing enim eu turpis egestas pretium. Aliquet sagittis id consectetur purus. In pellentesque massa placerat duis ultricies. Facilisi nullam vehicula ipsum a arcu cursus vitae. Pellentesque id nibh tortor id aliquet lectus proin nibh. Nibh praesent tristique magna sit amet purus gravida quis blandit. Sed cras ornare arcu dui vivamus arcu felis bibendum. Nec feugiat in fermentum posuere urna nec tincidunt praesent. A diam sollicitudin tempor id eu nisl nunc mi ipsum. Diam in arcu cursus euismod quis viverra nibh cras. Id semper risus in hendrerit gravida.
+
+***
+(4:00)
+template: hed
+more_data: this should show up as data but not display
+
+Slide template hed
+***
+
+subtitle: Fini
+
