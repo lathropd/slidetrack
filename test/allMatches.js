@@ -2,7 +2,7 @@
 
 const chai = require('chai')
 const assert = chai.assert
-const allMatches = require('../../lib/markymarkup').allMatches
+const allMatches = require('../lib/markymarkup').allMatches
 
 // demo tests from https://www.sitepoint.com/unit-test-javascript-mocha-chai/
 
