@@ -39,17 +39,34 @@ describe('renderBody', function () {
   })
 })
 
-// the function used to render the markymarkup into html
-describe('convert', function () {
-
-})
-
 // the function used to parse individual markymarkup sections into data
 describe('parseSection', function () {
+  let testText = exampleFiles['section1.txt']
+  let testResult = marky.parseSection(testText)
+  let expectedResult = JSON.parse(exampleFiles['section1.json'])
 
+  it('should correctly generate a content attribute', function () {
+    assert(testResult.content, expectedResult.content)
+  })
+
+  it('should preserve the markymarkup as a "text" attribute', function () {
+    assert(testResult.text, expectedResult.text)
+  })
+
+  it('should correctly create the data elements', function () {
+    assert(testResult.data.index, expectedResult.data.index)
+    assert(testResult.data.title, expectedResult.data.title)
+    assert(testResult.data.template, expectedResult.data.template)
+    assert(testResult.data.meta, expectedResult.data.meta)
+  })
 })
 
 // the function used to render individual sections from markymarkup
+describe('renderSection', function () {
+
+})
+
+// the function used to render the markymarkup into html
 describe('convert', function () {
 
 })

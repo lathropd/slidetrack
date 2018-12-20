@@ -1,0 +1,10 @@
+(12:22)
+title: the overall title
+meta: some other data
+template:this-isn't-used.html
+
+Then there is some text. Which is cool.
+
+Right?
+
+subhed: and maybe some YAML

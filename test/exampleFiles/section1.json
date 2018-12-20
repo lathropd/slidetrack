@@ -1,0 +1,10 @@
+{
+  "data": {
+    "title": "the overall title",
+    "meta": "some other data",
+    "template": "this-isn't-used.html",
+    "index": "12:22"
+  },
+  "content": "<p>Then there us some text. Which is cool.</p>\n<p>Right?</p>\n\n<h3 class=\"subhed\">and maybe some YAML</h3>",
+  "text": "(12:22)\ntitle: the overall title\nmeta: some other data\ntemplate:this-isn't-used.html\n\nThen there is some text. Which is cool.\n\nRight?\n\nsubhed: and maybe some YAML"
+}
