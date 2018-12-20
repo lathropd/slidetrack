@@ -2,20 +2,23 @@
 
 const chai = require('chai')
 const assert = chai.assert
-const describe = chai.describe
-const it = chai.it
 const marky = require('../../lib/markymarkup')
 const fs = require('fs')
 
 // read the example files into an object
 let exampleFiles = {}
-fs.readdirSync('../exampleFiles', { withFileTypes: true })
+fs.readdirSync('test/exampleFiles/', { withFileTypes: true })
   .filter(entry => entry.isFile)
   .forEach(entry => {
-    exampleFiles[entry.name] = fs.readFileSync('../exampleFiles' + entry.name)
+    exampleFiles[entry.name] = fs.readFileSync('test/exampleFiles/' + entry.name)
   })
 
 // begin describing the functions
-describe('', function () {
+describe('renderBody', function () {
+  it('should return bare paragraphs in <p> tags', function () {
+    let lorem = marky.renderBody(exampleFiles)
+    assert.equal(lorem, exampleFiles.loremipsum.html)
+
+  })
 
 })
