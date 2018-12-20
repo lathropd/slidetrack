@@ -14,6 +14,8 @@ fs.readdirSync('test/exampleFiles/', { withFileTypes: true })
   })
 
 // begin describing the functions
+
+// the function used to render section bodies
 describe('renderBody', function () {
   it('should return bare paragraphs in <p> tags', function () {
     let lorem = marky.renderBody(exampleFiles['loremipsum.txt'])
@@ -33,7 +35,21 @@ describe('renderBody', function () {
   })
 
   it('should render a mixture of YAML and bare grafs', function () {
-    assert.equal(exampleFiles['loremmixed.html'], marky.renderBody(exampleFiles['loremmixed.txt']))
+    assert.equal(marky.renderBody(exampleFiles['loremmixed.txt']), exampleFiles['loremmixed.html'])
   })
+})
+
+// the function used to render the markymarkup into html
+describe('convert', function () {
+
+})
+
+// the function used to parse individual markymarkup sections into data
+describe('parseSection', function () {
+
+})
+
+// the function used to render individual sections from markymarkup
+describe('convert', function () {
 
 })
