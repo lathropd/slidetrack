@@ -78,5 +78,8 @@ describe('renderSection', function () {
 
 // the function used to render the markymarkup into html
 describe('convert', function () {
-  
+  it('should correctly convert a whole markymarkup document into html fragments', function () {
+    let testHTML = marky.convert(exampleFiles['script2.txt'])
+    assert.equal(testHTML, exampleFiles['script2.html'])
+  })
 })
