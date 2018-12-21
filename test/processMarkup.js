@@ -54,19 +54,29 @@ describe('parseSection', function () {
   })
 
   it('should correctly create the data elements', function () {
-    assert(testResult.data.index, expectedResult.data.index)
-    assert(testResult.data.title, expectedResult.data.title)
-    assert(testResult.data.template, expectedResult.data.template)
-    assert(testResult.data.meta, expectedResult.data.meta)
+    assert.equal(testResult.data.index, expectedResult.data.index)
+    assert.equal(testResult.data.title, expectedResult.data.title)
+    assert.equal(testResult.data.template, expectedResult.data.template)
+    assert.equal(testResult.data.meta, expectedResult.data.meta)
   })
 })
 
 // the function used to render individual sections from markymarkup
 describe('renderSection', function () {
+  it('should correctly render a section with its own template', function () {
+    let testData = JSON.parse(exampleFiles['section1.json'])
+    let testResult = marky.renderSection(testData)
+    assert.equal(testResult, exampleFiles['section1.html'])
+  })
 
+  it('should correctly render a section without its own template', function () {
+    let testData = JSON.parse(exampleFiles['section2.json'])
+    let testResult = marky.renderSection(testData)
+    assert.equal(testResult, exampleFiles['section2.html'])
+  })
 })
 
 // the function used to render the markymarkup into html
 describe('convert', function () {
-
+  
 })
