@@ -1,7 +1,6 @@
 (12:22)
 title: the overall title
 meta: some other data
-template: documentcloud
 url: https://www.documentcloud.org/documents/4327014-CalTrans-Pay-Per-Mile-Report.html
 
 Then there is some text. Which is cool.

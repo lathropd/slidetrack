@@ -1,0 +1,23 @@
+{# if there's a url attribute use that for the embed url #}
+{# otherwise use the content as url and set content to false #}
+{% if data.url %}
+  {% set url = data.url %}
+{% else %}
+  {% set url = content %}
+  {% set content = false %}
+{% endif %}
+
+{% block embed %}
+<div class="embed">
+  <iframe src="{{ url }}" frameborder="0"></iframe>
+</div>
+{% endblock %}
+
+{# add the content block by default if it's not being used as an url #}
+{% if content %}
+  {% block content %}
+  <div class="annotation">
+    {{ content | safe }}
+  </div>
+  {% endblock %}
+{% endif %}

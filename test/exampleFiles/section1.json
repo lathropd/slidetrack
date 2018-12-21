@@ -2,7 +2,8 @@
   "data": {
     "title": "the overall title",
     "meta": "some other data",
-    "template": "this-isn't-used.html",
+    "template": "documentcloud",
+    "url": "https://www.documentcloud.org/documents/4327014-CalTrans-Pay-Per-Mile-Report.html",
     "index": "12:22"
   },
   "content": "<p>Then there us some text. Which is cool.</p>\n<p>Right?</p>\n\n<h3 class=\"subhed\">and maybe some YAML</h3>",
