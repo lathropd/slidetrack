@@ -8,7 +8,6 @@ const slidetrack = function (params) {
   this.waversurfer = waversurfer // TODO: figure this out later for now should work if waversurfer is already loaded
   this.slides = new slides(params)
   this.scaffold = () => scaffold(params)
-  this.convert = marky.convert
 }
 
 // bootstraping functions
