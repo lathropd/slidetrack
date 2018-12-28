@@ -1,0 +1,104 @@
+/*
+* Slidetrack CSS V1.0.0
+* Copyright 2019, Daniel Lathrop
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 1/1/2019
+*/
+
+
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+- Import Skeleton framework
+- Override fonts
+- Create slide setup similar to container
+- Media queries
+*/
+
+/* Framework
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@import "Skeleton/css/normalize.css";
+@import "Skeleton/css/skeleton.css";
+
+
+
+/* Overide Skeleton font settings
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+body {
+  font-family: "Glacial Indifference", "GlacialIndifference", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+/* Slide setup
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display:                 flex;
+  display:                 -webkit-flex; /* Safari 8 */
+  flex-wrap:               wrap;
+  -webkit-flex-wrap:       wrap;         /* Safari 8 */
+  justify-content:         center;
+  -webkit-justify-content: center;       /* Safari 8 */
+}
+
+
+.column {
+  margin: 0 auto 0 auto;
+}
+
+.slide .column {
+  margin: auto auto auto auto;
+}
+
+
+/* Self Clearing  */
+.slide:after,
+.container:after,
+.row:after,
+.u-cf {
+  content: "";
+  display: table;
+  clear: both; }
+
+
+/* Deal with small windows
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Really small windows, screens (like an iPhone 5 in landscape mode)
+   will shrink the content. If either dimension is 320px or under */
+
+@media (max-width: 320px) {
+  body * {
+    transform: scale(0.75);
+  }
+}
+
+@media (max-height: 320px)  {
+  body  * {
+    transform: scale(0.75)
+  }
+}
+
+
+/* Media queires
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Larger than mobile */
+@media (min-width: 400px) {}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}
