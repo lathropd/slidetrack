@@ -1,0 +1,44 @@
+(0:00)
+audio: examples/the-grindstone/Frost-Robert_01_357A_The-Grindstone_Speech-Lab-Recordings_New-York_1934.mp3
+note: photo by <a href="https://www.flickr.com/photos/ethomsen/3740182411">Elizabeth Thompsen</a>
+
+hed: The Grindstone
+subhed: Read by the author, Robert Frost
+photo: examples/the-grindstone/frost-statue.jpg
+
+***
+(0:33)
+notes: photo from Mike on Flickr https://www.flickr.com/photos/7687126@N06/16157500032/
+
+fullscreen: examples/the-grindstone/grindstones.jpg
+
+***
+(1:03)
+
+The poem was published in <em>New Hampshire</em>, which in 1924 won Frost the first of four 
+Pulitzer Prize awards for poetry.
+
+photo: examples/the-grindstone/pulitzer-medal.png
+
+
+***
+(1:50)
+
+photo: examples/the-grindstone/pastoral-art-of-frost.jpg
+
+"To produce a thing of value, man must sacrifice his own natural desires,
+subuit to suffering, and impose a cruelly tyrranical standard upon himself." 
+
+***
+(2:31) 
+
+documentcloud: https://www.documentcloud.org/documents/5674231-Masculinity-and-Transgression-in-Robert-Frost/annotations/473222.html
+
+
+***
+(3:14)
+
+documentcloud: https://www.documentcloud.org/documents/5674219-The-Value-of-Social-Conservatism/annotations/473194.html
+
+
+
