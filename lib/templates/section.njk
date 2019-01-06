@@ -1,4 +1,7 @@
-<section data-index="{{ data.index }}" {% if data.bgimage %}
+<section data-index="{{ data.index }}" {% if data.id %}
+         id = "{{ data.id }}"{% endif %}{% if data.class %}
+         class = "{{ data.class }}"{% elseif globals.class %}
+         class = "{{ globals.class }}"{% endif %}{% if data.bgimage %}
          data-background-image="{{ data.bgimage }}"
          {% endif %}{% if data.bgcolor %}
          data-background-color="{{ data.bgcolor }}"
