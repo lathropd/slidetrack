@@ -1,4 +1,8 @@
-<section data-index="{{ data.index }}">
+<section data-index="{{ data.index }}" {% if data.bgimage %}
+         data-background-image="{{ data.bgimage }}"
+         {% endif %}{% if data.bgcolor %}
+         data-background-color="{{ data.bgcolor }}"
+         {% endif %}>
 {% block content %}
   {{ content | safe }}
 {% endblock %}

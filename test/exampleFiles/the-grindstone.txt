@@ -9,8 +9,8 @@ photo: examples/the-grindstone/frost-statue.jpg
 ***
 (0:33)
 notes: photo from Mike on Flickr https://www.flickr.com/photos/7687126@N06/16157500032/
+bgimage: examples/the-grindstone/grindstones.jpg
 
-fullscreen: examples/the-grindstone/grindstones.jpg
 
 ***
 (1:03)
