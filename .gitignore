@@ -110,3 +110,8 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+bundle.js
+.DS_Store
+src/.DS_Store
+src/css/.DS_Store
+package-lock.json
