@@ -44,7 +44,8 @@
         "steal-sass": "git+https://github.com/lathropd/steal-sass.git",
         "steal-tools": "^2.0.11",
         "wavesurfer": "^1.3.4",
-        "web-animations-js": "^2.3.1"
+        "web-animations-js": "^2.3.1",
+        "xmlhttprequest": "^1.8.0"
     },
     "dependencies": {
         "bluebird": "^3.5.3",

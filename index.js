@@ -4,11 +4,11 @@ const marky = require('./lib/markymarkup') // markup related functions
 const nunjucks = require('nunjucks')
 
 const slidetrack = function (params) {
-  this.slides = new slides(params)
+  params = Object.assign({}, params)
   if (params.scaffold) {
     params.player = scaffold(params)
   }
-  return this
+  return new slides(params)
 }
 
 // bootstraping functions
@@ -27,5 +27,6 @@ function scaffold (params) {
 if (window) {
   window.slidetrack = slidetrack
 }
+
 
 exports.module = slidetrack

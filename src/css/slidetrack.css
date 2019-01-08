@@ -15,23 +15,35 @@
 - Media queries
 */
 
+
 /* Framework
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @import "Skeleton-2.0.4/css/normalize.css";
 @import "Skeleton-2.0.4/css/skeleton.css";
 
 
+/* fonts 
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@import "fonts/GlacialIndifference/font.css";
+
 
 /* Overide Skeleton font settings
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 body {
   font-family: "Glacial Indifference", "GlacialIndifference", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
+  background: url(powered-by-slidetrack.png) center no-repeat;
+  background-size: 20%;
+  height: 100vh;
+  width: 100%;
+  max-width: 177vh;
+  
+  overflow: hidden;
 }
 
 /* Slide setup
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .slide {
+  opacity: 0.0;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -39,13 +51,51 @@ body {
   padding: 2rem;
   box-sizing: border-box;
   overflow: hidden;
-  display:                 flex;
+  display:                 flex; 
   display:                 -webkit-flex; /* Safari 8 */
   flex-wrap:               wrap;
-  -webkit-flex-wrap:       wrap;         /* Safari 8 */
-  justify-content:         center;
-  -webkit-justify-content: center;       /* Safari 8 */
+  -webkit-flex-wrap:       wrap;        /*  Safari 8 */
+  justify-content:         baseline;
+  background-color: whitesmoke;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+  flex-direction: column;
+  text-align: left;
 }
+ .slide h1, .slide h2, .slide h3, .slide h4, .slide h5{
+  width: 100%;
+  text-align: center;
+
+
+}
+
+.slide p {
+  text-align: left;
+  max-width: 60rem;
+  margin: auto;
+  flex-grow: 0;
+
+}
+
+.slide div {
+  margin: auto;
+}
+
+
+
+
+.slide div.photo {
+  flex-grow: 2;
+  background: no-repeat center/contain;
+  width: 100%;
+  max-height: 80%;
+}
+
+.slide div.photo img {
+display: none;
+}
+
 
 
 .column {
@@ -54,6 +104,11 @@ body {
 
 .slide .column {
   margin: auto auto auto auto;
+}
+
+footer {
+  z-index: 2;
+  opacity: 0.25;
 }
 
 
