@@ -31,7 +31,6 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 body {
   font-family: "Glacial Indifference", "GlacialIndifference", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: url(powered-by-slidetrack.png) center no-repeat;
   background-size: 20%;
   height: 100vh;
   width: 100%;
@@ -40,6 +39,51 @@ body {
   overflow: hidden;
 }
 
+header {
+  position: absolute;
+  height: 100px;
+  text-align: right;
+  z-index: 100;
+  right: 20px;
+  opacity: 0.5;
+
+}
+
+
+
+header:hover, footer:hover {
+  opacity: 1.0;
+}
+
+header a:hover {
+  color: darkgrey;
+}
+header a {
+  color: lightgrey;
+}
+.controllers {
+  font-size: 3rem;
+}
+
+footer {
+  z-index: 100;
+  opacity: 1.0;
+  display: block;
+  position: absolute;
+  top: calc(100vh - 100px);
+  width: 100%;
+  height: 100px;
+  opacity: 0.25;
+}
+article {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  background: url(powered-by-slidetrack.png) center no-repeat;
+  background-size: 20vh;
+
+}
 /* Slide setup
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .slide {
@@ -62,10 +106,14 @@ body {
   background-size: cover;
   flex-direction: column;
   text-align: left;
+  padding-bottom: 72px;
 }
  .slide h1, .slide h2, .slide h3, .slide h4, .slide h5{
   width: 100%;
   text-align: center;
+  flex-grow: 0;
+  font-weight: bold;
+  margin-top: -2rem;
 
 
 }
@@ -106,10 +154,7 @@ display: none;
   margin: auto auto auto auto;
 }
 
-footer {
-  z-index: 2;
-  opacity: 0.25;
-}
+
 
 
 /* Self Clearing  */
