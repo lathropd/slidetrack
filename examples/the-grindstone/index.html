@@ -107,11 +107,8 @@
   <script src="../../bundle.js"></script>
   <script>
   let st = {};
-  st = slidetrack({audio: 'output.mp3'})
-  window.addEventListener("click", function () {st.player.context = new AudioContext()}, {once: true})
   window.addEventListener("load", () => {
-    console.log("?")
-
+    st = slidetrack({audio: 'output.mp3'})
   })
 
   </script

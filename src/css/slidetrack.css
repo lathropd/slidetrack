@@ -39,7 +39,7 @@ body {
   overflow: hidden;
 }
 
-header {
+header, .controllers {
   position: absolute;
   height: 100px;
   text-align: right;
